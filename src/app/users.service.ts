@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { User, UserType } from './classes/user';
+import { Workout, WorkoutType } from './classes/workout';
 import { catchError, map } from 'rxjs/operators';
 import { LoginAccount, LoginAccountType } from './classes/loginAccount';
 
@@ -13,6 +14,7 @@ export class UsersService {
 
   private url = 'http://localhost:7777/users';
   private accountsUrl = 'http://localhost:7777/accounts';
+  private workoutsUrl = 'http://localhost:7777/workouts';
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +23,16 @@ export class UsersService {
     // const httpOptions = {
     //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     // };
-    return this.http.get<User>(this.url+'/'+index_nr)
+    return this.http.get<UserType>(this.url+'/'+index_nr)
+    .pipe(map((Usser:{index_nr:number,
+      name:string,
+      age:number,
+      weight:number,
+      height:number,
+      gender:string})=>
+        new User(Usser.index_nr,Usser.name,Usser.age,Usser.weight,Usser.height,Usser.gender)
+      ),
+        catchError(this.handleError<User>('getUser')))
   }
 
   getAccounts(): Observable<LoginAccount[]> {
@@ -35,6 +46,20 @@ export class UsersService {
           return new LoginAccount(loginAccount.login,loginAccount.password,loginAccount.index_nr);})
         ),
         catchError(this.handleError<LoginAccount[]>('getAccounts', []))
+      );
+  }
+
+  getWorkouts(): Observable<Workout[]> {
+    console.log("get workout");
+    return this.http.get<WorkoutType[]>(this.workoutsUrl)
+      .pipe(
+         map((Workouts: {
+          index_nr:number,
+          name:string,
+          description:string}[])=>Workouts.map(workout=>{
+          return new Workout(workout.index_nr,workout.name, workout.description );})
+        ),
+        catchError(this.handleError<Workout[]>('getWorkouts', []))
       );
   }
 
@@ -61,7 +86,8 @@ export class UsersService {
     // const studentObj={name: student.Name, surname: student.Surname, index_nr: student.Index_nr, dataUrodzenia: student.dataUrodzenia};
     // if((student as OutstandingStudentClass).stypendium!==undefined) Object.assign(studentObj, {stypendium: (student as OutstandingStudentClass).stypendium});
     // console.log("edit",studentObj);
-    return this.http.put<User>(this.url+'/'+user.Index_nr, user, httpOptions)
+    console.log("dziala")
+    return this.http.put<User>(this.url+'/'+user.Index_nr+'.json', user, httpOptions)
       .pipe(
         // tu ładnie konwersja działa, niepotrzebne
         // map((studentret: Student)=>{
@@ -76,7 +102,7 @@ export class UsersService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    this.http.put<User>(this.url+'/users.json', user, httpOptions)
+    this.http.post<User>(this.url, user, httpOptions)
       .pipe(
 
         catchError(this.handleError<User>('createUser'))
@@ -86,6 +112,7 @@ export class UsersService {
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
+    console.log('nie działa')
     return (error: any): Observable<T> => {
       console.error(operation + ' failed' + error);
       return of(result as T);

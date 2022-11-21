@@ -39,12 +39,14 @@ export class RegistrationComponent implements OnInit {
       else{
         console.log("dobre haslo");
       }
-      // this.index = 0
-      // this.users.forEach(element => {
-      //   if(element.Index_nr == this.index)
-      //   this.index++
-      // });
-      this.registrationAccount.User.Index_nr = this.users.length
+      this.index = 0
+      this.users.forEach(element => {
+        this.indexes.push(element.Index_nr)
+      });
+      while(this.indexes.includes(this.index)){
+        this.index++
+      }
+      this.registrationAccount.User.Index_nr = this.index
       this.usersService.createUser(this.registrationAccount.User)
   }
 

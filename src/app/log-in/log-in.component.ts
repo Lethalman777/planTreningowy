@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LoginAccount } from '../classes/loginAccount';
 import { User } from '../classes/user';
+import { Workout } from '../classes/workout';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -11,13 +12,16 @@ import { UsersService } from '../users.service';
 export class LogInComponent implements OnInit {
 
   @Input() loginAccount!: LoginAccount;
-  loginAccounts!:LoginAccount[]
+  loginAccounts:LoginAccount[] = []
+  workouts:Workout[]=[]
   user:User = new User(1,"",0,0,0,"")
   users:User[]=[]
   i:number = 0
+  isLoged:boolean = false
   constructor(usersService:UsersService) {
     usersService.getAccounts().subscribe(data=>this.loginAccounts=data)
     usersService.getUsers().subscribe(data=>this.users=data)
+    usersService.getWorkouts().subscribe(data=>this.workouts=data)
     this.i=0
    }
 
@@ -38,6 +42,12 @@ export class LogInComponent implements OnInit {
     else{
       console.log("dobre haslo");
     }
+    this.loginAccounts.forEach(element => {
+      if(element.Login == this.loginAccount.Login && element.Password == this.loginAccount.Password){
+        this.isLoged=true
+      }
+
+    });
   }
 
 }

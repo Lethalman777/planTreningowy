@@ -40,6 +40,18 @@ app.get('/accounts', (req, res) => {
   });
 });
 
+app.get('/workouts', (req, res) => {
+  fs.readFile('./workouts.json', 'utf8', (err, workoutsJson) => {
+      if (err) {
+          console.log("File read failed in GET /workouts: "+ err);
+          res.status(500).send('File read failed');
+          return;
+      }
+      console.log("GET: /workouts");
+      res.send(workoutsJson);
+  });
+});
+
 app.get('/users/:index', (req, res) => {
     fs.readFile('./users.json', 'utf8', (err, usersJson) => {
         if (err) {
@@ -99,7 +111,7 @@ app.put('/users/:index', (req, res) => {
         var users = JSON.parse(usersJson);
         var userBody = users.find(usertmp => usertmp.index_nr == req.body.index_nr);
         if (userBody && userBody.index_nr != req.params.index_nr) {
-            console.log("user by index_nr = " + suserBody.index_nr + " already exists");
+            console.log("user by index_nr = " + userBody.index_nr + " already exists"+req.params.index_nr);
             res.status(500).send('user by index_nr = ' + userBody.index_nr + ' already exists');
             return;
         }

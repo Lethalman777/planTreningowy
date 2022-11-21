@@ -24,7 +24,7 @@ export class User {
     this.index_nr = index_nr;
   }
   get Index_nr(): number {
-    return this.Index_nr;
+    return this.index_nr;
   }
   get Name(): string {
     return this.name;

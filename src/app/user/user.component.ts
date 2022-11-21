@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../classes/user';
+import { User, UserType } from '../classes/user';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -14,9 +14,7 @@ export class UserComponent implements OnInit {
   @Input() prefix!: string;
   users!: User[]
   constructor(usersService: UsersService) {
-
     usersService.getUsers().subscribe(data=>this.users = data)
-    usersService.getUser(1).subscribe(data=>this.user=data)
    }
 
   ngOnInit(): void {

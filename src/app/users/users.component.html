@@ -12,5 +12,5 @@
 </ol>
 
 <div *ngIf="selected >- 1">
-  <edit-user [user]="users[selected]" (messageEvent)="select($event)"></edit-user>
+  <edit-user [user]="users[selected]" [selected]="selected" (messageEvent)="select($event)"></edit-user>
 </div>
