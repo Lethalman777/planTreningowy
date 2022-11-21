@@ -1,0 +1,10 @@
+.title{
+  color: orange;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+
+.selected{
+  background-color: rgb(81, 255, 0);
+}

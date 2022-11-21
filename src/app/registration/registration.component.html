@@ -1,0 +1,44 @@
+<div>
+  <table class="jakakolwieknazwa">
+    <tr>
+      <td>Login:</td>
+      <td><input type="text" [(ngModel)]="registrationAccount.Login" id="login"/></td>
+    </tr>
+    <tr>
+      <td>Password:</td>
+      <td><input type="password" [(ngModel)]="registrationAccount.Password" id="password"/></td>
+    </tr>
+    <tr>
+      <td>Password Confirmed:</td>
+      <td><input type="password" [(ngModel)]="registrationAccount.PasswordConfirmed" id="passwordConfirmed"/></td>
+    </tr>
+    <tr>
+      <td>Imie:</td>
+      <td><input type="text" [(ngModel)]="registrationAccount.User.Name"></td>
+    </tr>
+    <tr>
+      <td>Wiek:</td>
+      <td><input type="number" [(ngModel)]="registrationAccount.User.Age"></td>
+    </tr>
+    <tr>
+      <td>Waga:</td>
+      <td><input type="number" [(ngModel)]="registrationAccount.User.Weight"></td>
+    </tr>
+    <tr>
+      <td>Wzrost:</td>
+      <td><input type="number" [(ngModel)]="registrationAccount.User.Height"></td>
+    </tr>
+    <tr>
+      <td>Płeć:</td>
+      <td><input type="text" [(ngModel)]="registrationAccount.User.Gender"></td>
+    </tr>
+    <tr>
+      <td>
+        <button class="logginButton" (click)="Registration()" type="submit">Zarejestruj się</button>
+      </td>
+      <td>
+        <button class="backButton">Powrót</button>
+      </td>
+    </tr>
+  </table>
+</div>

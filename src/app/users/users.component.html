@@ -1,0 +1,16 @@
+<p [ngClass]="'title'">Lista userów</p>
+
+<ol>
+  <li *ngFor="let user of users;index as i" (click)="select(i)" [class.selected]="i === selected">
+    <span *ngIf="user.Name.endsWith('a')">
+      <print-user [user]="user" prefix = "Dane użytkowniczki: "></print-user>
+    </span>
+    <span *ngIf="!user.Name.endsWith('a')">
+      <print-user [user]="user" prefix = "Dane użytkownika: "></print-user>
+    </span>
+  </li>
+</ol>
+
+<div *ngIf="selected >- 1">
+  <edit-user [user]="users[selected]" (messageEvent)="select($event)"></edit-user>
+</div>
