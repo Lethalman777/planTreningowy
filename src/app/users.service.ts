@@ -18,6 +18,16 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
+  deleteUser(user: User){
+    this.http.delete<User>(this.url+'/'+user.Index_nr, )
+      .pipe(
+
+        catchError(this.handleError<User>('createUser'))
+      ).subscribe((res)=>{
+        console.log(res)
+      });
+  }
+
   getUser(index_nr:number): Observable<User> {
     console.log("get user"+index_nr);
     // const httpOptions = {
