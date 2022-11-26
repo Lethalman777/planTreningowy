@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
@@ -10,13 +10,12 @@ import { LogInComponent } from './log-in/log-in.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
-import { DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { FlatpickrModule } from 'angularx-flatpickr';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 
-
+export const appRouters: Routes = [
+  {path: 'login', component: LogInComponent},
+  {path: 'registration', component: RegistrationComponent}
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,8 +30,7 @@ import { UserDeleteComponent } from './user-delete/user-delete.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    FlatpickrModule,
-    CalendarModule
+    RouterModule.forRoot(appRouters)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,293 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+  background-color: #690500;
+}
+h1{
+  color: white;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.loginBox{
+    width: 230px;
+    padding: 40px;
+    margin-top: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 20px;
+    border-radius: 15px;
+    background: #191919;
+    text-align:center;
+}
+.loginBox h1{
+   color: white;
+   text-transform:uppercase;
+   font-weight: 500;
+}
+.loginBox div{
+  color:white;
+}
+.loginBox h6{
+  color:white;
+}
+.loginBox input[type ="text"],
+.loginBox input[type ="password"] {
+  border: 0;
+  background: none;
+  height: 25px;
+  display: block;
+  position: flex;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #ffa31a;
+  padding: 14px 10px;
+  width: 200px;
+  height: 20px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.loginBox input[type ="text"]:hover,
+.loginBox input[type ="password"]:hover {
+  background: #ffa31a
+}
+.loginBox input[type ="text"]:focus,
+.loginBox input[type ="password"]:focus {
+  width: 220px;
+  border-color: #ffa31a;
+}
+.logginButton {
+  border: 0;
+  background: none;
+  height: 50px;
+  display: block;
+  margin: 30px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 20px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+  cursor: pointer;
+}
+.logginButton:hover {
+  background: #2ecc71;
+  width: 220px;
+}
+.registerButton {
+  border: 0;
+  background: none;
+  height: 50px;
+  display: block;
+  margin: 30px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+  cursor: pointer;
+}
+.registerButton:hover {
+  background: #2ecc71;
+  width: 220px;
+}
+.backButton {
+  border: 0;
+  background: none;
+  height: 50px;
+  display: block;
+  margin: 30px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+  cursor: pointer;
+}
+.backButton:hover {
+  background: #2ecc71;
+  width: 220px;
+}
+.registerBox {
+  width: 230px;
+  padding: 40px;
+  position: absolute;
+  margin-top: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 20px;
+  border-radius: 15px;
+  background: #191919;
+  text-align: center;
+}
+.registerBox div{
+  color:white;
+}
+.registerBox input[type ="text"],
+.registerBox input[type ="password"],
+.registerBox input[type ="number"],
+.registerBox input[type ="datetime-local"]{
+  border: 0;
+  height: 25px;
+  background: none;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #ffa31a;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.registerBox input[type ="text"]:hover,
+.registerBox input[type ="password"]:hover,
+.registerBox input[type ="number"]:hover,
+.registerBox input[type ="datetime-local"]:hover {
+    background: #ffa31a
+}
+.registerBox input[type ="text"]:focus,
+.registerBox input[type ="password"]:focus,
+.registerBox input[type ="number"]:focus,
+.registerBox input[type ="datetime-local"]:focus {
+    width: 220px;
+    border-color: #ffa31a;
+}
+.registerBox button[type = "submit"] {
+  border: 0;
+  background: none;
+  height: 50px;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+  cursor: pointer;
+}
+.registerBox button[type = "submit"]:hover {
+  background: #2ecc71;
+}
+.users li{
+  list-style: none;
+}
+.users table {
+  background-color: #2ecc71 ;
+  border: 2px solid white;
+  border-radius: 10px 10px 10px 10px;
+  width: 100%;
+  font-family: Andele Mono, monospace;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  color: white;
+}
+.users table thead{
+  color:#191919;
+  font-family: Andele Mono, monospace;
+  font-weight: 900;
+}
+.editBox {
+  width: 230px;
+  padding: 40px;
+  position: absolute;
+  margin-top: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 20px;
+  border-radius: 15px;
+  background: #191919;
+  text-align: center;
+}
+.editBox div{
+  color:white;
+}
+.editBox input[type ="text"],
+.editBox input[type ="password"],
+.editBox input[type ="number"],
+.editBox input[type ="datetime-local"]{
+  border: 0;
+  height: 25px;
+  background: none;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #ffa31a;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.editBox input[type ="text"]:hover,
+.editBox input[type ="password"]:hover,
+.editBox input[type ="number"]:hover,
+.editBox input[type ="datetime-local"]:hover {
+    background: #ffa31a
+}
+.editBox input[type ="text"]:focus,
+.editBox input[type ="password"]:focus,
+.editBox input[type ="number"]:focus,
+.editBox input[type ="datetime-local"]:focus {
+    width: 220px;
+    border-color: #ffa31a;
+}
+.editBox button[type = "submit"] {
+  border: 0;
+  background: none;
+  height: 50px;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+  cursor: pointer;
+}
+.editBox button[type = "submit"]:hover {
+  background: #2ecc71;
+  width:220px;
+}
+.deleteButton {
+  border: 0;
+  background: none;
+  height: 50px;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid red;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+  cursor: pointer;
+}
+.deleteButton:hover {
+  background: red;
+  width:220px;
+}
+

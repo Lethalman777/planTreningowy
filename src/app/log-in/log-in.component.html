@@ -1,20 +1,19 @@
-<div>
-  <table class="jakakolwieknazwa">
-    <tr>
-      <td>Login:</td>
-      <td><input type="text" [(ngModel)]="loginAccount.Login" id="login"/></td>
-    </tr>
-    <tr>
-      <td>Password:</td>
-      <td><input type="password" [(ngModel)]="loginAccount.Password" id="password"/></td>
-    </tr>
-    <tr>
-      <td>
-        <button class="logginButton" (click)="LogIn()" type="submit">Zaloguj się</button>
-      </td>
-      <td>
-        <button class="registerButton">Zarejestruj się</button>
-      </td>
-    </tr>
-  </table>
-</div>
+<section class="loginBox">
+  <div>
+    <h1>Logowanie</h1>
+      <tr>
+        <div>Login:</div>
+        <input type="text" [(ngModel)]="loginAccount.Login" id="login"/>
+      </tr>
+      <tr>
+        <div>Password:</div>
+        <input type="password" [(ngModel)]="loginAccount.Password" id="password"/>
+      </tr>
+      <tr>
+          <button class="logginButton" (click)="LogIn()" type="submit">Zaloguj się</button>
+          <button class="registerButton">Zarejestruj się</button>
+          <h6 style="color:white;">Nie masz jeszcze konta? Zarejestruj się!</h6>
+      </tr>
+
+  </div>
+</section>

@@ -1,7 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { User, UserType } from '../classes/user';
 import { UsersService } from '../users.service';
-
 @Component({
   selector: 'edit-user',
   templateUrl: './user-edit.component.html',

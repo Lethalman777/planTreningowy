@@ -1,27 +1,21 @@
-<h2 [ngClass]="'title'">Edit: </h2>
-<table>
-  <tr>
-    <th>Imie:</th>
-    <td><input [(ngModel)]="user.Name"></td>
-  </tr>
-  <tr>
-    <th>Wiek:</th>
-    <td><input [(ngModel)]="user.Age"></td>
-  </tr>
-  <tr>
-    <th>Waga:</th>
-    <td><input [(ngModel)]="user.Weight"></td>
-  </tr>
-  <tr>
-    <th>Wzrost:</th>
-    <td><input [(ngModel)]="user.Height"></td>
-  </tr>
-  <tr>
-    <th>Płeć:</th>
-    <td><input [(ngModel)]="user.Gender"></td>
-  </tr>
-  <tr>
-    <button (click)="save()">Save</button>
-  </tr>
-</table>
+<section class="editBox">
+    <h1>Edit</h1>
+    <div>Imie:</div>
+    <input type="text" [(ngModel)]="user.Name">
+
+    <div>Wiek:</div>
+    <input type="number"  [(ngModel)]="user.Age">
+
+    <div>Waga:</div>
+    <input type="number" [(ngModel)]="user.Weight">
+
+    <div>Wzrost:</div>
+    <input type="number" [(ngModel)]="user.Height">
+
+    <div>Płeć:</div>
+    <input type="text" [(ngModel)]="user.Gender">
+    <br>
+    <button type="submit" (click)="save()">Save</button>
+
+</section>
 

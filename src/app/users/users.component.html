@@ -1,15 +1,19 @@
-<p [ngClass]="'title'">Lista userów</p>
-
-<ol>
-  <li *ngFor="let user of users;index as i" (click)="select(i)" [class.selected]="i === selected">
-    <span *ngIf="user.Name.endsWith('a')">
-      <print-user [user]="user" prefix = "Dane użytkowniczki: "></print-user>
-    </span>
-    <span *ngIf="!user.Name.endsWith('a')">
-      <print-user [user]="user" prefix = "Dane użytkownika: "></print-user>
-    </span>
-  </li>
-</ol>
+<section class="users">
+  <h1>Users list</h1>
+  <table>
+    <thead>
+      <div style="text-indent:28%;word-spacing:17px;" >Name Wiek Waga Wzrost Płeć</div>
+    </thead>
+      <li *ngFor="let user of users;index as i" (click)="select(i)" [class.selected]="i === selected">
+        <span *ngIf="user.Name.endsWith('a')">
+          <print-user [user]="user" prefix = "Dane użytkowniczki: "></print-user>
+        </span>
+        <span *ngIf="!user.Name.endsWith('a')">
+          <print-user [user]="user" prefix = "Dane użytkownika: "></print-user>
+        </span>
+    </li>
+  </table>
+</section>
 
 <div *ngIf="selected >- 1">
   <edit-user [user]="users[selected]" [selected]="selected" (messageEvent)="select($event)"></edit-user>

@@ -17,10 +17,10 @@ export class UsersComponent implements OnInit {
   constructor(usersService: UsersService) {
     usersService.getUsers().subscribe(data=>this.users = data)
     usersService.getAccounts().subscribe(data=>this.accounts=data)
-    // this.users.push(new User(0,"Eryk", 22, 70, 178, "male"));
-    // this.users.push(new User(0,"Dawid", 21, 105, 200, "male"));
-    // this.users.push(new User(0,"Łukasz", 19, 100, 199, "male"));
-    // this.users.push(new User(0,"Dominika", 22, 70, 178, "i dont know"));
+     this.users.push(new User(0,"Eryk", 22, 70, 178, "male"));
+     this.users.push(new User(0,"Dawid", 21, 105, 200, "male"));
+     this.users.push(new User(0,"Łukasz", 19, 100, 199, "male"));
+     this.users.push(new User(0,"Dominika", 22, 70, 178, "i dont know"));
   }
 
   select(index: number){
