@@ -18,7 +18,10 @@ export class LogInComponent implements OnInit {
   users:User[]=[]
   i:number = 0
   isLoged:boolean = false
+  usersService: UsersService
+
   constructor(usersService:UsersService) {
+    this.usersService = usersService
     usersService.getAccounts().subscribe(data=>this.loginAccounts=data)
     usersService.getUsers().subscribe(data=>this.users=data)
     usersService.getWorkouts().subscribe(data=>this.workouts=data)
@@ -45,6 +48,11 @@ export class LogInComponent implements OnInit {
     this.loginAccounts.forEach(element => {
       if(element.Login == this.loginAccount.Login && element.Password == this.loginAccount.Password){
         this.isLoged=true
+        this.users.forEach(element1 => {
+          if(element.Index_nr == element1.Index_nr){
+            this.user = element1
+          }
+        });
       }
 
     });

@@ -5,6 +5,7 @@ import { User, UserType } from './classes/user';
 import { Workout, WorkoutType } from './classes/workout';
 import { catchError, map } from 'rxjs/operators';
 import { LoginAccount, LoginAccountType } from './classes/loginAccount';
+import { RegistrationAccount, RegistrationAccountType } from './classes/registrationAccount';
 
 @Injectable({
   providedIn: 'root'
@@ -120,6 +121,22 @@ export class UsersService {
         console.log(res)
       });
   }
+
+  createAccount(account: RegistrationAccountType){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    console.log("działają konta")
+    this.http.post<RegistrationAccountType>(this.accountsUrl, account, httpOptions)
+      .pipe(
+
+        catchError(this.handleError<RegistrationAccountType>('createAccount'))
+      ).subscribe((res)=>{
+        console.log(res)
+      });
+  }
+
 
   private handleError<T>(operation = 'operation', result?: T) {
     console.log('nie działa')

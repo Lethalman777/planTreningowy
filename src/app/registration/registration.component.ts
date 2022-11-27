@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as e from 'express';
-import { RegistrationAccount } from '../classes/registrationAccount';
+import { RegistrationAccount, RegistrationAccountType } from '../classes/registrationAccount';
 import { User } from '../classes/user';
 import { UsersService } from '../users.service';
 
@@ -23,7 +23,7 @@ export class RegistrationComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.registrationAccount = new RegistrationAccount("", "", "", new User(0,"", 0, 0, 0, ""))
+    this.registrationAccount = new RegistrationAccount("", "", "", new User(0,"", 0, 0, 0, ""), 0)
   }
 
   Registration(){
@@ -47,7 +47,17 @@ export class RegistrationComponent implements OnInit {
         this.index++
       }
       this.registrationAccount.User.Index_nr = this.index
+      this.registrationAccount.Index_nr = this.index
       this.usersService.createUser(this.registrationAccount.User)
+      // this.registrationAccountType.login = this.registrationAccount.Login
+      // this.registrationAccountType.password = this.registrationAccount.Password
+      // this.registrationAccountType.index_nr = this.index
+      const registrationAccountType : RegistrationAccountType = {
+        login : this.registrationAccount.Login,
+        password : this.registrationAccount.Password,
+        index_nr : this.index
+      }
+      this.usersService.createAccount(registrationAccountType)
   }
 
 }

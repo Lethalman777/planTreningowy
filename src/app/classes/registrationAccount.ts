@@ -1,4 +1,9 @@
 import {User} from './user';
+export type RegistrationAccountType = {
+  login: string;
+  password: string;
+  index_nr: Number;
+}
 
 export class RegistrationAccount
 {
@@ -6,14 +11,19 @@ export class RegistrationAccount
   private password: string;
   private passwordConfirmed: string;
   private user: User;
+  private index_nr: Number;
 
-  constructor(login:string, password: string, passwordConfirmed : string, user: User){
+  constructor(login:string, password: string, passwordConfirmed : string, user: User, index_nr : Number){
     this.login = login;
     this.password = password;
     this.passwordConfirmed = passwordConfirmed;
     this.user = user;
+    this.index_nr = index_nr;
   }
 
+  get Index_nr(): Number {
+    return this.index_nr;
+  }
   get Login(): string {
     return this.login;
   }
@@ -25,6 +35,9 @@ export class RegistrationAccount
   }
   get User(): User {
     return this.user;
+  }
+  set Index_nr(index_nr: Number){
+    this.index_nr = index_nr;
   }
   set Login(login: string){
     this.login = login;

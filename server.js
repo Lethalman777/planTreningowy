@@ -101,6 +101,35 @@ app.post('/users', (req, res) => {
     });
 });
 
+app.post('/accounts', (req, res) => {
+  fs.readFile('./accounts.json', 'utf8', (err, accountsJson) => {
+      if (err) {
+          console.log("File read failed in POST /accounts: "+ err);
+          res.status(500).send('File read failed');
+          return;
+      }
+      var accounts = JSON.parse(accountsJson);
+      var account = accounts.find(accounttmp => accounttmp.index_nr == req.body.index_nr);
+      if (!account) {
+        accounts.push(req.body);
+          var newList = JSON.stringify(accounts);
+          fs.writeFile('./accounts.json', newList, err => {
+              if (err) {
+                  console.log("Error writing file in POST /accounts: "+ err);
+                  res.status(500).send('Error writing file accounts.json');
+              } else {
+                  res.status(201).send(req.body);
+                  console.log("Successfully wrote file accounts.json and added new account with index = " + req.body.index_nr);
+              }
+          });
+      } else {
+          console.log("account by index = " + req.body.index_nr + " already exists");
+          res.status(500).send('account by index = ' + req.body.index_nr + ' already exists');
+          return;
+      }
+  });
+});
+
 app.put('/users/:index', (req, res) => {
     fs.readFile('./users.json', 'utf8', (err, usersJson) => {
         if (err) {
