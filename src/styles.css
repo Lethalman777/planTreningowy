@@ -140,7 +140,7 @@ h1{
   border: 0;
   height: 25px;
   background: none;
-  display: block;
+  display:block;
   margin: 5px auto;
   text-align: center;
   border: 2px solid #ffa31a;
@@ -290,4 +290,26 @@ h1{
   background: red;
   width:220px;
 }
-
+.dayBox{
+  width: 20%;
+  padding: 40px;
+  margin-top: 20px;
+  margin-right: 10px;
+  border: 2px solid #ffa31a ;
+  border-radius: 15px;
+  background: #191919;
+  text-align: center;
+  display:block;
+  color:#ffa31a;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.kalendarz{
+  display: flex;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.kalendarz .dayBox ul li{
+  list-style: none;
+  text-align: center;
+  color: white;
+}
