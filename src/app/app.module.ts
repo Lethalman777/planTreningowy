@@ -8,8 +8,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogInComponent } from './log-in/log-in.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { PlanComponent } from './plan/plan.component';
 import { HttpClientModule } from '@angular/common/http';
-
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 
 export const appRouters: Routes = [
@@ -25,6 +25,7 @@ export const appRouters: Routes = [
     UserEditComponent,
     LogInComponent,
     RegistrationComponent,
+    PlanComponent,
   ],
   imports: [
     BrowserModule,
