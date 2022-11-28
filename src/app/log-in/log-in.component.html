@@ -10,8 +10,8 @@
         <input type="password" [(ngModel)]="loginAccount.Password" id="password"/>
       </tr>
       <tr>
-          <button class="logginButton" (click)="LogIn()" type="submit">Zaloguj się</button>
-          <button class="registerButton">Zarejestruj się</button>
+          <button class="logginButton" (click)="LogIn()" routerLink="/plan" type="submit">Zaloguj się</button>
+          <button class="registerButton" routerLink="/registration">Zarejestruj się</button>
           <h6 style="color:white;">Nie masz jeszcze konta? Zarejestruj się!</h6>
       </tr>
 

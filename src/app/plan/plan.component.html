@@ -6,11 +6,11 @@
         <span *ngFor="let schedule of schedules">
           <span *ngIf="schedule.Day==day">
             <ul>
-            <span *ngFor="let workout of workouts">
+            <li *ngFor="let workout of workouts">
               <span *ngIf="schedule.Index_workout==workout.Index_nr">
                 <app-workout [workout]="workout"></app-workout>
               </span>
-            </span>
+            </li>
             </ul>
             </span>
           </span>

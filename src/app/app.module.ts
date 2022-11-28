@@ -12,6 +12,7 @@ import { PlanComponent } from './plan/plan.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { WorkoutComponent } from './workout/workout.component';
+import { AppRoutingModule } from './app-routing.module';
 
 export const appRouters: Routes = [
   {path: 'login', component: LogInComponent},
@@ -33,7 +34,8 @@ export const appRouters: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRouters)
+    RouterModule.forRoot(appRouters),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
