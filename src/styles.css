@@ -8,7 +8,8 @@ h1{
 .loginBox{
     width: 230px;
     padding: 40px;
-    margin-top: 200px;
+    margin-top: 100px;
+    margin-left: 110px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -292,14 +293,15 @@ h1{
   width:220px;
 }
 .dayBox{
-  width: 16%;
+  width: 160px;
+  height: 300px;
   padding: 40px;
   margin-top: 20px;
-  margin-right: 10px;
+  margin-right:0px;
   border: 2px solid #ffa31a ;
   border-radius: 15px;
   background: #191919;
-  text-align: center;
+  text-align:center;
   display:block;
   color:#ffa31a;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -314,3 +316,75 @@ h1{
   text-align: center;
   color: white;
 }
+.dayButton{
+  height: 10px;
+  border: 2px solid #2ecc71;
+  background: none;
+  height: 50px;
+  display:block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 170px;
+  cursor: pointer;
+}
+.dayButton:hover {
+  background: #2ecc71;
+  width:160px;
+}
+.cwiczenieBox{
+  width:80px;
+  border: 2px solid red;
+  height:auto;
+  background-color: bisque;
+  display:block;
+  margin: 5px auto;
+  text-align: center;
+  padding: 14px 40px;
+  outline: none;
+  border-radius: 20px;
+}
+.cwiczenieBox div{
+  text-indent: 0%;
+}
+.workout .name{
+  color: #2ecc71;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: small;
+  margin-left:0%;
+}
+.workout .description{
+  color: black;
+  font-style: normal;
+  font-size: smaller;
+  margin-left:0%;
+}
+.nextButton{
+  height: 10px;
+  border: 2px solid #2ecc71;
+  background: #191919;
+  height: 50px;
+  display:block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 150px;
+  cursor: pointer;
+  margin-top: 65px;
+}
+.nextButton:hover{
+  background-color: #2ecc71;
+}
+
+

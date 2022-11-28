@@ -1,24 +1,32 @@
-<h1 style="text-indent: 45%;"> Oto twój plan tygodnia </h1>
+<h1 style="text-indent: 49%;"> Oto twój plan tygodnia </h1>
 <section class="kalendarz">
-<ul *ngFor="let day of week">
+  <button class="nextButton" style="margin-top:176px" type="submit">Poprzedni tydzień</button>
+  <ul *ngFor="let day of week">
     <section class="dayBox">
       <div>{{day}}</div>
+      <section class="cwiczenieBox">
         <span *ngFor="let schedule of schedules">
           <span *ngIf="schedule.Day==day">
-            <ul>
-            <li *ngFor="let workout of workouts">
-              <span *ngIf="schedule.Index_workout==workout.Index_nr">
-                <app-workout [workout]="workout"></app-workout>
-              </span>
-            </li>
-            </ul>
-            </span>
+              <div *ngFor="let workout of workouts">
+                <span *ngIf="schedule.Index_workout==workout.Index_nr">
+                  <app-workout style="color:black;font-weight: 900;" [workout]="workout"></app-workout>
+                </span>
+              </div>
           </span>
+        </span>
       </section>
+      <button class="dayButton" type="submit">Edytuj</button>
+    </section>
   </ul>
-</section>
+  <section class="przyciski">
+    <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień</button> <br>
+    <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień(+)</button> <br>
+    <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień(-)</button>
+  </section>
+  </section>
 
-<section class="kalendarz">
+
+<!--<section class="kalendarz">
   <section class="dayBox">
     <div>Poniedziałek</div>
     <ul>
@@ -57,4 +65,4 @@
       <li>Czasem nogi</li>
     </ul>
   </section>
-</section>
+</section>-->
