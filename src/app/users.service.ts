@@ -7,6 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 import { LoginAccount, LoginAccountType } from './classes/loginAccount';
 import { Schedule, ScheduleType } from './classes/schedule';
 import { RegistrationAccount, RegistrationAccountType } from './classes/registrationAccount';
+import { UsersComponent } from './users/users.component';
 
 @Injectable({
   providedIn: 'root'
@@ -42,22 +43,26 @@ export class UsersService {
   }
 
 
-  getUser(index_nr:number): Observable<User> {
-    console.log("get user"+index_nr);
-    // const httpOptions = {
-    //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    // };
-    return this.http.get<UserType>(this.url+'/'+index_nr)
-    .pipe(map((Usser:{index_nr:number,
-      name:string,
-      age:number,
-      weight:number,
-      height:number,
-      gender:string})=>
-        new User(Usser.index_nr,Usser.name,Usser.age,Usser.weight,Usser.height,Usser.gender)
-      ),
+   getUser(index_nr:number): Observable<User> {
+     console.log("get user"+index_nr);
+   const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+   };
+     return this.http.get<UserType>(this.url+'/'+index_nr)
+     .pipe(map((Usser:{index_nr:number,
+       name:string,
+       age:number,
+       weight:number,
+       height:number,
+       gender:string})=>
+         new User(Usser.index_nr,Usser.name,Usser.age,Usser.weight,Usser.height,Usser.gender)
+       ),
         catchError(this.handleError<User>('getUser')))
-  }
+   }
+  // getUser(id: number):Observable<User>{
+
+  //   return of(user);
+  // }
 
   getAccounts(): Observable<LoginAccount[]> {
     console.log("get account");

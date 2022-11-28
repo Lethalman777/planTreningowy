@@ -14,5 +14,8 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "fs": "0.0.1-security"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^15.0.1"
   }
 }

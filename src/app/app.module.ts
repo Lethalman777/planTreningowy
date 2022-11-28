@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 export const appRouters: Routes = [
   {path: 'login', component: LogInComponent},
@@ -28,7 +29,8 @@ export const appRouters: Routes = [
     LogInComponent,
     RegistrationComponent,
     PlanComponent,
-    WorkoutComponent
+    WorkoutComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,7 @@ export class LogInComponent implements OnInit {
     usersService.getAccounts().subscribe(data=>this.loginAccounts=data)
     usersService.getUsers().subscribe(data=>this.users=data)
     usersService.getWorkouts().subscribe(data=>this.workouts=data)
+
     this.i=0
    }
 
@@ -52,10 +53,13 @@ export class LogInComponent implements OnInit {
           if(element.Index_nr == element1.Index_nr){
             this.user = element1
           }
+          // return this.usersService.getUser(this.user.Index_nr).subscribe(user => this.user = user);
         });
       }
 
     });
   }
+
+
 
 }

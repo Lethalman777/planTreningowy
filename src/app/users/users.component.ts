@@ -29,5 +29,9 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  find(index: number){
+    const usr = this.users.find(x => x.Index_nr === index);
+    return usr;
+  }
 
 }
