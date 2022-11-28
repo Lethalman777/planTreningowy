@@ -3,16 +3,14 @@
   <button class="nextButton" style="margin-top:176px" type="submit">Poprzedni tydzień</button>
   <ul *ngFor="let day of week">
     <section class="dayBox">
-      <div>{{day}}</div>
+      <div>{{day.Name}}</div>
       <section class="cwiczenieBox">
-        <span *ngFor="let schedule of schedules">
-          <span *ngIf="schedule.Day==day">
-              <div *ngFor="let workout of workouts">
-                <span *ngIf="schedule.Index_workout==workout.Index_nr">
+        <span *ngFor="let DayWorkouts of schedule.ListOfDayWorkouts">
+           <!-- <span *ngIf="DayWorkouts.Date==day.Date"> -->
+              <div *ngFor="let workout of DayWorkouts.Workouts">
                   <app-workout style="color:black;font-weight: 900;" [workout]="workout"></app-workout>
-                </span>
               </div>
-          </span>
+          <!-- </span> -->
         </span>
       </section>
       <button class="dayButton" type="submit">Edytuj</button>

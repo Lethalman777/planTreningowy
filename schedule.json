@@ -1,7 +1,50 @@
 [
   {
     "index_nr": 1,
-    "index_workout": 1,
-    "day": "Poniedziałek"
+    "weekNumber": "48",
+    "userName": "eryczeslaw",
+    "listOfDayWorkouts": [
+      {
+        "date": "28.11.2022",
+        "workouts": [
+          {
+            "index_nr":1,
+            "name":"wyciskanie na ławce",
+            "description":"5 razy 5 powtórzeń"
+          },
+          {
+            "index_nr":2,
+            "name":"spacer na bieżni",
+            "description":"20 min"
+          }
+        ]
+      },
+      {
+        "date": "29.11.2022",
+        "workouts": [
+          {
+            "index_nr":1,
+            "name":"wyciskanie na ławce",
+            "description":"5 razy 5 powtórzeń"
+          }
+        ]
+      },
+      {
+        "date": "30.11.2022",
+        "workouts": [
+          {
+            "index_nr":2,
+            "name":"spacer na bieżni",
+            "description":"20 min"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index_nr": 2,
+    "weekNumber": "49",
+    "userName": "eryczeslaw",
+    "listOfDayWorkouts": []
   }
 ]

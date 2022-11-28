@@ -1,35 +1,54 @@
-export type ScheduleType = {
-  index_nr : number
-  index_workout : number
-  day : string
-}
-export class Schedule{
-  private index_nr : number
-  private index_workout : number
-  private day : string
+import { DayWorkout } from '../classes/dayWorkout';
 
-  constructor(index_nr:number, index_workout:number, day:string){
-    this.index_nr = index_nr
-    this.index_workout = index_workout
-    this.day = day
+export type ScheduleType = {
+  index_nr: number;
+  weekNumber: number;
+  userName: string;
+  listOfDayWorkouts: DayWorkout[];
+};
+export class Schedule {
+  private index_nr: number;
+  private weekNumber: number;
+  private userName: string;
+  private listOfDayWorkouts: DayWorkout[];
+
+  constructor(
+    index_nr: number,
+    weekNumber: number,
+    userName: string,
+    listOfDayWorkouts: DayWorkout[]
+  ) {
+    this.index_nr = index_nr;
+    this.weekNumber = weekNumber;
+    this.userName = userName;
+    this.listOfDayWorkouts = listOfDayWorkouts;
   }
 
   get Index_nr(): number {
     return this.index_nr;
   }
-  get Index_workout(): number {
-    return this.index_workout;
+
+  get WeekNumber(): number {
+    return this.weekNumber;
   }
-  get Day(): string {
-    return this.day;
+
+  set WeekNumber(weekNumber: number) {
+    this.weekNumber = weekNumber;
   }
-  set Index_nr(index_nr: number){
-    this.index_nr = index_nr;
+
+  get UserName(): string {
+    return this.userName;
   }
-  set Index_workout(index_workout: number){
-    this.index_workout = index_workout;
+
+  set UserName(userName: string) {
+    this.userName = userName;
   }
-  set Day(day: string){
-    this.Day = day;
+
+  get ListOfDayWorkouts(): DayWorkout[] {
+    return this.listOfDayWorkouts;
   }
+
+  set ListOfDayWorkouts(listOfDayWorkouts: DayWorkout[]) {
+    this.listOfDayWorkouts = listOfDayWorkouts;
   }
+}

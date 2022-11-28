@@ -64,6 +64,26 @@ app.get('/schedule', (req, res) => {
   });
 });
 
+app.get('/schedule/:weekNumber', (req, res) => {
+  fs.readFile('./schedule.json', 'utf8', (err, scheduleJson) => {
+      if (err) {
+          console.log("File read failed in GET /schedule/" + req.params.weekNumber + ": "+ err);
+          res.status(500).send('File read failed');
+          return;
+      }
+      var schedules = JSON.parse(scheduleJson);
+      var schedule = schedules.find(scheduletmp => scheduletmp.weekNumber == req.params.weekNumber);
+      if (!schedule) {
+          console.log("Can't find schedule with weekNumber: " + req.params.weekNumber);
+          res.status(500).send('Cant find schedule with weekNumber: ' + req.params.weekNumber);
+          return;
+      }
+      var scheduleJSON = JSON.stringify(schedule);
+      console.log("GET /schedule/" + req.params.weekNumber);
+      res.send(scheduleJSON);
+  });
+});
+
 app.get('/users/:index', (req, res) => {
     fs.readFile('./users.json', 'utf8', (err, usersJson) => {
         if (err) {
