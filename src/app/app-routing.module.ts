@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import {LogInComponent} from './log-in/log-in.component'
 import { PlanComponent } from './plan/plan.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { RegistrationComponent } from './registration/registration.component'
 
 const routes: Routes = [
-    {path: 'log-in', component: LogInComponent},
+  {path: 'log-in', component: LogInComponent},
     {path: 'registration', component: RegistrationComponent},
     {path: 'plan', component: PlanComponent},
-    {path: '', redirectTo: '/log-in', pathMatch: 'full'}
+    {path: '', redirectTo:'/home', pathMatch: 'full'},
+    {path: 'home', component: HomePageComponent}
   ];
 
 @NgModule({
