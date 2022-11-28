@@ -1,5 +1,24 @@
 <h1 style="text-indent: 45%;"> Oto twój plan tygodnia </h1>
 <section class="kalendarz">
+<ul *ngFor="let day of week">
+    <section class="dayBox">
+      <div>{{day}}</div>
+        <span *ngFor="let schedule of schedules">
+          <span *ngIf="schedule.Day==day">
+            <ul>
+            <span *ngFor="let workout of workouts">
+              <span *ngIf="schedule.Index_workout==workout.Index_nr">
+                <app-workout [workout]="workout"></app-workout>
+              </span>
+            </span>
+            </ul>
+            </span>
+          </span>
+      </section>
+  </ul>
+</section>
+
+<section class="kalendarz">
   <section class="dayBox">
     <div>Poniedziałek</div>
     <ul>

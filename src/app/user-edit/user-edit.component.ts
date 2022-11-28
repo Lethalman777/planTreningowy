@@ -11,7 +11,6 @@ export class UserEditComponent implements OnInit {
   @Input() user!: User;
   @Input() selected!:number
   usersService:UsersService
-  userCopy: User = new User(0,"",0,0,0,"")
   @Output() messageEvent = new EventEmitter<number>();
   @Output("editMethod") doEditInParent=new EventEmitter<{student:User,which:number}>();
 
@@ -21,12 +20,15 @@ export class UserEditComponent implements OnInit {
 
   save():void{
     console.log("edited student",this.user,this.selected);
-    this.userCopy.Index_nr=this.user.Index_nr
-    this.userCopy.Name=this.user.Name
-    this.userCopy.Height=this.user.Height
-    this.userCopy.Weight=this.user.Weight
-    this.userCopy.Gender=this.user.Gender
-    this.usersService.editUser(new User(0,"",1,1,1,"")).subscribe(ret=>  {
+    const userCopy : UserType = {
+    index_nr:this.user.Index_nr,
+    name:this.user.Name,
+    age:this.user.Age,
+    height:this.user.Height,
+    weight:this.user.Weight,
+    gender:this.user.Gender,
+    }
+    this.usersService.editUser(userCopy).subscribe(ret=>  {
       console.log("ret",ret);
       this.user=this.user}
       //pobieramy dane getem

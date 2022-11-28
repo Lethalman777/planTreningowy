@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { PlanComponent } from './plan/plan.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { WorkoutComponent } from './workout/workout.component';
 
 export const appRouters: Routes = [
   {path: 'login', component: LogInComponent},
@@ -26,6 +27,7 @@ export const appRouters: Routes = [
     LogInComponent,
     RegistrationComponent,
     PlanComponent,
+    WorkoutComponent
   ],
   imports: [
     BrowserModule,

@@ -52,6 +52,18 @@ app.get('/workouts', (req, res) => {
   });
 });
 
+app.get('/schedule', (req, res) => {
+  fs.readFile('./schedule.json', 'utf8', (err, scheduleJson) => {
+      if (err) {
+          console.log("File read failed in GET /schedule: "+ err);
+          res.status(500).send('File read failed');
+          return;
+      }
+      console.log("GET: /schedule");
+      res.send(scheduleJson);
+  });
+});
+
 app.get('/users/:index', (req, res) => {
     fs.readFile('./users.json', 'utf8', (err, usersJson) => {
         if (err) {
@@ -99,6 +111,35 @@ app.post('/users', (req, res) => {
             return;
         }
     });
+});
+
+app.post('/schedules', (req, res) => {
+  fs.readFile('./schedules.json', 'utf8', (err, scheduleJson) => {
+      if (err) {
+          console.log("File read failed in POST /schedule: "+ err);
+          res.status(500).send('File read failed');
+          return;
+      }
+      var schedules = JSON.parse(scheduleJson);
+      var schedule = schedules.find(scheduletmp => scheduletmp.index_nr == req.body.index_nr);
+      if (!schedule) {
+        schedules.push(req.body);
+          var newList = JSON.stringify(schedules);
+          fs.writeFile('./schedule.json', newList, err => {
+              if (err) {
+                  console.log("Error writing file in POST /schedule: "+ err);
+                  res.status(500).send('Error writing file schedule.json');
+              } else {
+                  res.status(201).send(req.body);
+                  console.log("Successfully wrote file schedule.json and added new schedule with index = " + req.body.index_nr);
+              }
+          });
+      } else {
+          console.log("schedule by index = " + req.body.index_nr + " already exists");
+          res.status(500).send('schedule by index = ' + req.body.index_nr + ' already exists');
+          return;
+      }
+  });
 });
 
 app.post('/accounts', (req, res) => {

@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
       else{
         console.log("dobre haslo");
       }
-      this.index = 0
+      this.index = 1
       this.users.forEach(element => {
         this.indexes.push(element.Index_nr)
       });

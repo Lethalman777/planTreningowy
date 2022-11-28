@@ -5,6 +5,7 @@ import { User, UserType } from './classes/user';
 import { Workout, WorkoutType } from './classes/workout';
 import { catchError, map } from 'rxjs/operators';
 import { LoginAccount, LoginAccountType } from './classes/loginAccount';
+import { Schedule, ScheduleType } from './classes/schedule';
 import { RegistrationAccount, RegistrationAccountType } from './classes/registrationAccount';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class UsersService {
   private url = 'http://localhost:7777/users';
   private accountsUrl = 'http://localhost:7777/accounts';
   private workoutsUrl = 'http://localhost:7777/workouts';
+  private scheduleUrl = 'http://localhost:7777/schedule';
 
   constructor(private http: HttpClient) { }
 
@@ -23,11 +25,22 @@ export class UsersService {
     this.http.delete<User>(this.url+'/'+user.Index_nr, )
       .pipe(
 
-        catchError(this.handleError<User>('createUser'))
+        catchError(this.handleError<User>('deleteUser'))
       ).subscribe((res)=>{
         console.log(res)
       });
   }
+
+  deleteSchedule(schedule: Schedule){
+    this.http.delete<Schedule>(this.scheduleUrl+'/'+schedule.Index_nr, )
+      .pipe(
+
+        catchError(this.handleError<Schedule>('deleteSchedule'))
+      ).subscribe((res)=>{
+        console.log(res)
+      });
+  }
+
 
   getUser(index_nr:number): Observable<User> {
     console.log("get user"+index_nr);
@@ -74,6 +87,20 @@ export class UsersService {
       );
   }
 
+  getSchedule(): Observable<Schedule[]> {
+    console.log("get workout");
+    return this.http.get<ScheduleType[]>(this.scheduleUrl)
+      .pipe(
+         map((Schedules: {
+          index_nr:number,
+          index_workout:number,
+          day:string}[])=>Schedules.map(schedule=>{
+          return new Schedule(schedule.index_nr,schedule.index_workout, schedule.day);})
+        ),
+        catchError(this.handleError<Schedule[]>('getSchedules', []))
+      );
+  }
+
   getUsers(): Observable<User[]> {
     console.log("get user");
     return this.http.get<UserType[]>(this.url)
@@ -90,7 +117,7 @@ export class UsersService {
       );
   }
 
-  editUser(user: User): Observable<User> {
+  editUser(user: UserType): Observable<UserType> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -98,13 +125,13 @@ export class UsersService {
     // if((student as OutstandingStudentClass).stypendium!==undefined) Object.assign(studentObj, {stypendium: (student as OutstandingStudentClass).stypendium});
     // console.log("edit",studentObj);
     console.log("dziala")
-    return this.http.put<User>(this.url+'/'+user.Index_nr+'.json', user, httpOptions)
+    return this.http.put<UserType>(this.url+'/'+user.index_nr+'.json', user, httpOptions)
       .pipe(
         // tu ładnie konwersja działa, niepotrzebne
         // map((studentret: Student)=>{
         // if(studentret.stypendium) return new OutstandingStudentClass(studentret.name,studentret.surname,studentret.index_nr,studentret.stypendium,studentret.dataUrodzenia);
         // return new StudentClass(studentret.name,studentret.surname,studentret.index_nr,studentret.dataUrodzenia);}),
-        catchError(this.handleError<User>('editUser'))
+        catchError(this.handleError<UserType>('editUser'))
       );
   }
 
@@ -122,12 +149,25 @@ export class UsersService {
       });
   }
 
+  createSchedule(schedule: Schedule){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    this.http.post<Schedule>(this.scheduleUrl, schedule, httpOptions)
+      .pipe(
+
+        catchError(this.handleError<Schedule>('createSchedule'))
+      ).subscribe((res)=>{
+        console.log(res)
+      });
+  }
+
   createAccount(account: RegistrationAccountType){
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    console.log("działają konta")
     this.http.post<RegistrationAccountType>(this.accountsUrl, account, httpOptions)
       .pipe(
 
