@@ -3,7 +3,7 @@ import { Schedule } from '../classes/schedule';
 import { UsersService } from '../users.service';
 import { Workout, WorkoutType } from '../classes/workout';
 import { Day } from '../classes/day';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-plan',
@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./plan.component.css'],
 })
 export class PlanComponent implements OnInit {
+  index_nr!:number
   usersService!: UsersService;
   schedule: Schedule = new Schedule(0, 0, '', []);
   schedules!: Schedule[];
@@ -21,7 +22,7 @@ export class PlanComponent implements OnInit {
   currentDate!: Date;
   weekId: number = 48;
 
-  constructor(usersService: UsersService, private route: ActivatedRoute) {
+  constructor(usersService: UsersService,private router: Router, private route: ActivatedRoute) {
     this.usersService = usersService;
     this.currentDate = new Date();
     usersService.getScheduleFromWeekNumber(this.weekId).subscribe((data) => {
@@ -31,7 +32,11 @@ export class PlanComponent implements OnInit {
     this.week = this.getWeek(this.currentDate);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      //this.id = Number(params['id']);
+      this.index_nr = Number(this.route.snapshot.paramMap.get('id'))})
+  }
 
   private getWeek(currentDate: Date): Day[] {
     let currentDay: number = currentDate.getDate();
@@ -147,5 +152,9 @@ export class PlanComponent implements OnInit {
         console.log(date);
         console.log(this.week);
       });
+  }
+
+  public goToDetails(){
+    this.router.navigate(['/users',this.index_nr])
   }
 }
