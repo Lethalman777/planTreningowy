@@ -13,7 +13,13 @@
           </span>
         </span>
       </section>
-      <button class="dayButton" type="submit">Edytuj</button>
+      <button class="dayButton" type="submit" (click)="doEdit(day)">Edytuj</button>
+      <div *ngIf="isEdit&&currentDay==day">
+        <select  name="workoutChoose" (change)="workoutChoose($event)" id="work" >
+          <option>--wybierz--</option>
+          <option [value]="workout" *ngFor="let workout of workouts">{{workout.Name}}</option>
+        </select>
+      </div>
     </section>
   </ul>
   <section class="przyciski">

@@ -174,10 +174,8 @@ export class UsersService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
-    // const studentObj={name: student.Name, surname: student.Surname, index_nr: student.Index_nr, dataUrodzenia: student.dataUrodzenia};
-    // if((student as OutstandingStudentClass).stypendium!==undefined) Object.assign(studentObj, {stypendium: (student as OutstandingStudentClass).stypendium});
-    // console.log("edit",studentObj);
-    console.log('dziala');
+
+    console.log(user.index_nr);
     return this.http
       .put<UserType>(
         this.url + '/' + user.index_nr + '.json',
@@ -185,10 +183,7 @@ export class UsersService {
         httpOptions
       )
       .pipe(
-        // tu ładnie konwersja działa, niepotrzebne
-        // map((studentret: Student)=>{
-        // if(studentret.stypendium) return new OutstandingStudentClass(studentret.name,studentret.surname,studentret.index_nr,studentret.stypendium,studentret.dataUrodzenia);
-        // return new StudentClass(studentret.name,studentret.surname,studentret.index_nr,studentret.dataUrodzenia);}),
+
         catchError(this.handleError<UserType>('editUser'))
       );
   }
@@ -214,6 +209,19 @@ export class UsersService {
     this.http
       .post<Schedule>(this.scheduleUrl, schedule, httpOptions)
       .pipe(catchError(this.handleError<Schedule>('createSchedule')))
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  addWorkoutToSchedule(schedule:Schedule){
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+
+    this.http
+      .put<Schedule>(this.scheduleUrl+'/'+schedule.Index_nr, schedule, httpOptions)
+      .pipe(catchError(this.handleError<Schedule>('editSchedule')))
       .subscribe((res) => {
         console.log(res);
       });

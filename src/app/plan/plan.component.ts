@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Schedule } from '../classes/schedule';
 import { UsersService } from '../users.service';
-import { Workout } from '../classes/workout';
+import { Workout, WorkoutType } from '../classes/workout';
 import { Day } from '../classes/day';
 
 @Component({
@@ -17,6 +17,8 @@ export class PlanComponent {
   week: Day[] = [];
   previousMonday!: string;
   nextMonday!: string;
+  isEdit:boolean = false
+  currentDay!:Day
 
   constructor(usersService: UsersService) {
     this.usersService = usersService;
@@ -26,7 +28,6 @@ export class PlanComponent {
       .subscribe((data) => {(this.schedule = data)
       console.log(data)});
     usersService.getWorkouts().subscribe((data) => (this.workouts = data));
-    //this.workouts=this.schedule.ListOfDayWorkouts[0].Workouts
     this.week = this.getWeek(currentDate);
     this.previousMonday = this.getPreviousMonday(this.week);
     this.nextMonday = this.getNextMonday(this.week);
@@ -61,6 +62,27 @@ export class PlanComponent {
     }
 
     return week;
+  }
+
+  public doEdit(day:Day){
+    if(this.isEdit){
+      this.isEdit=false
+    }else{
+      this.isEdit=true
+      this.currentDay=day
+    }
+  }
+
+  public workoutChoose(data:any){
+  console.log("www")
+    const workoutType : WorkoutType = {
+      index_nr:data.target.value.Index_nr,
+      name:data.target.value.Name,
+      description:data.target.value.Description
+    }
+    this.schedule.ListOfDayWorkouts.find(u=>u.date==this.currentDay.Date)?.workouts.push(workoutType)
+    this.usersService.addWorkoutToSchedule(this.schedule)
+    this.isEdit=false
   }
 
   private getPreviousMonday(week: Day[]): string {

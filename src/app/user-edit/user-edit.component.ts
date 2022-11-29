@@ -30,7 +30,7 @@ export class UserEditComponent implements OnInit {
     }
     this.usersService.editUser(userCopy).subscribe(ret=>  {
       console.log("ret",ret);
-      this.user=this.user}
+      }
       //pobieramy dane getem
       );
       this.messageEvent.emit(-1);
