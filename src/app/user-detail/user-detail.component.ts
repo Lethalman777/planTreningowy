@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UsersService } from '../users.service';
 import { User } from '../classes/user';
+import { LoginAccount } from '../classes/loginAccount';
 
 @Component({
   selector: 'app-user-detail',
@@ -10,9 +11,9 @@ import { User } from '../classes/user';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent {
-user:User |undefined;
+user!:User;
 users:User[]=[];
-  constructor(private route: ActivatedRoute, private usersService: UsersService, private location: Location){
+  constructor(private route: ActivatedRoute, private router:Router, private usersService: UsersService, private location: Location){
   }
 id:any;
   ngOnInit(): void{
@@ -36,6 +37,11 @@ id:any;
   //    }
   // })
   console.log(this.user)
+}
+public deleteUser(){
+  this.usersService.deleteUser(this.id)
+  this.usersService.deleteAccount(this.id)
+  this.router.navigate(['/log-in'])
 }
 
   goBack(): void{
