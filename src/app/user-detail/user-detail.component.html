@@ -1,0 +1,12 @@
+<div *ngIf="user">
+  <h2>{{ user.Name }}</h2>
+  <h3>nie działa</h3>
+</div>
+<h3>działa {{id}}</h3>
+<!-- <div *ngIf="id>0">
+  <h2>git</h2>
+  <h3>nie działa</h3>
+</div> -->
+<li *ngFor="let item of users">
+  {{item.Index_nr}}  {{item.Name}}
+</li>

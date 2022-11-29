@@ -16,12 +16,12 @@ export class User {
   private gender: string;
 
   constructor(index_nr: number, name: string,age: number, weight: number, height: number, gender: string){
+    this.index_nr = index_nr;
     this.name = name;
     this.age = age;
     this.weight = weight;
     this.height = height;
     this.gender = gender;
-    this.index_nr = index_nr;
   }
   get Index_nr(): number {
     return this.index_nr;

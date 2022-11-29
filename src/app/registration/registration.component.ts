@@ -3,6 +3,8 @@ import * as e from 'express';
 import { RegistrationAccount, RegistrationAccountType } from '../classes/registrationAccount';
 import { User } from '../classes/user';
 import { UsersService } from '../users.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginAccount } from '../classes/loginAccount';
 
 @Component({
   selector: 'app-registration',
@@ -13,13 +15,17 @@ export class RegistrationComponent implements OnInit {
 
   @Input() registrationAccount!: RegistrationAccount;
   users!:User[]
+  loginAccounts!:LoginAccount[]
   usersService: UsersService
   indexes:number[] = []
   index:number = 0
+  isDataGood:boolean = true
+  wrongs:string[]=[]
 
-  constructor(usersService:UsersService) {
+  constructor(usersService:UsersService, private router:Router) {
     this.usersService = usersService
     usersService.getUsers().subscribe(data=>this.users=data)
+    usersService.getAccounts().subscribe(data=>this.loginAccounts=data)
    }
 
   ngOnInit(): void {
@@ -27,18 +33,35 @@ export class RegistrationComponent implements OnInit {
   }
 
   Registration(){
+    while(this.wrongs.length > 0){
+      this.wrongs.pop()
+    }
       if(this.registrationAccount.Login.length < 3){
         console.log("za krotki login");
+        this.isDataGood=false
+        this.wrongs.push('Login musi mieć przynajmniej niż 3 znaki')
       }
       else{
         console.log("dobry login");
+        this.isDataGood=true
       }
       if(this.registrationAccount.Password != this.registrationAccount.PasswordConfirmed){
         console.log("hasla są rózne");
+        this.isDataGood=false
+        this.wrongs.push('Wpisz powtórzenie hasła poprawnie')
       }
       else{
         console.log("dobre haslo");
+        this.isDataGood=true
       }
+      this.loginAccounts.forEach(element => {
+        if(element.Login==this.registrationAccount.Login){
+          console.log("istnieje już taki login");
+        this.isDataGood=false
+        this.wrongs.push('Wpisz inny login')
+        }
+      });
+      if(this.isDataGood){
       this.index = 1
       this.users.forEach(element => {
         this.indexes.push(element.Index_nr)
@@ -58,6 +81,8 @@ export class RegistrationComponent implements OnInit {
         index_nr : this.index
       }
       this.usersService.createAccount(registrationAccountType)
+      this.router.navigate(['/plan'])
+    }
   }
 
 }

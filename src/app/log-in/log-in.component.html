@@ -1,20 +1,35 @@
 <section class="loginBox">
   <div>
     <h1>Logowanie</h1>
-      <tr>
-        <div>Login:</div>
-        <input type="text" [(ngModel)]="loginAccount.Login" id="login"/>
-      </tr>
-      <tr>
-        <div>Password:</div>
-        <input type="password" [(ngModel)]="loginAccount.Password" id="password"/>
-      </tr>
-      <tr>
-          <button class="logginButton" (click)="LogIn()" routerLink="/plan" type="submit">Zaloguj się</button>
-          <button class="registerButton" routerLink="/registration">Zarejestruj się</button>
-          <h6 style="color:white;">Nie masz jeszcze konta? Zarejestruj się!</h6>
-      </tr>
+    <tr>
+      <div>Login:</div>
+      <input type="text" [(ngModel)]="loginAccount.Login" id="login" />
+    </tr>
+    <tr>
+      <div>Password:</div>
+      <input
+        type="password"
+        [(ngModel)]="loginAccount.Password"
+        id="password"
+      />
+    </tr>
+    <tr *ngIf="isWrongData">
+      <div>Niewłaściwy login lub hasło</div>
+    </tr>
+    <tr>
+      <button
+        class="logginButton"
+        (click)="LogIn()"
 
+        type="submit"
+      >
+        Zaloguj się
+      </button>
+      <button class="registerButton" routerLink="/registration">
+        Zarejestruj się
+      </button>
+      <h6 style="color: white">Nie masz jeszcze konta? Zarejestruj się!</h6>
+    </tr>
   </div>
 </section>
 <li *ngFor="let item of loginAccounts">
