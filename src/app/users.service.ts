@@ -21,18 +21,27 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
-  deleteUser(user: User) {
+  deleteUser(index_nr:number) {
     this.http
-      .delete<User>(this.url + '/' + user.Index_nr)
+      .delete<User>(this.url + '/' + index_nr)
       .pipe(catchError(this.handleError<User>('deleteUser')))
       .subscribe((res) => {
         console.log(res);
       });
   }
 
-  deleteSchedule(schedule: Schedule) {
+  deleteAccount(index_nr:number) {
     this.http
-      .delete<Schedule>(this.scheduleUrl + '/' + schedule.Index_nr)
+      .delete<LoginAccount>(this.accountsUrl + '/' + index_nr)
+      .pipe(catchError(this.handleError<LoginAccount>('deleteAccount')))
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  deleteSchedule(index_nr:number) {
+    this.http
+      .delete<Schedule>(this.scheduleUrl + '/' + index_nr)
       .pipe(catchError(this.handleError<Schedule>('deleteSchedule')))
       .subscribe((res) => {
         console.log(res);

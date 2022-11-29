@@ -316,6 +316,34 @@ app.delete('/users/:index', (req, res) => {
     });
 });
 
+app.delete('/accounts/:index', (req, res) => {
+  fs.readFile('./accounts.json', 'utf8', (err, accountsJson) => {
+      if (err) {
+          console.log("File read failed in DELETE /accounts: "+ err);
+          res.status(500).send('File read failed');
+          return;
+      }
+      var accounts = JSON.parse(accountsJson);
+      var accountIndex = accounts.findIndex(accounttmp => accounttmp.index_nr == req.params.index);
+      if (accountIndex != -1) {
+        accounts.splice(accountIndex, 1);
+          var newList = JSON.stringify(accounts);
+          fs.writeFile('./accounts.json', newList, err => {
+              if (err) {
+                  console.log("Error writing file in DELETE /accounts/" + req.params.index+": "+ err);
+                  res.status(500).send('Error writing file accounts.json');
+              } else {
+                  res.status(204).send();
+                  console.log("Successfully deleted account with index = " + req.params.index);
+              }
+          });
+      } else {
+          console.log("account by index = " + req.params.index + " does not exists");
+          res.status(500).send('account by index = ' + req.params.index + ' does not exists');
+          return;
+      }
+  });
+});
 app.listen(7777, () => console.log("Server address http://localhost:7777"));
 
 //node -r esm server.js

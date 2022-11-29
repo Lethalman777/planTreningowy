@@ -10,6 +10,7 @@ import { UsersService } from '../users.service';
 
 export class UserDeleteComponent {
   @Input() user!: User;
+  @Input() id!:number
 @Input() selected!:number
 usersService:UsersService
   constructor(usersService: UsersService) {
@@ -17,6 +18,7 @@ usersService:UsersService
    }
 
    delete(){
-    this.usersService.deleteUser(this.user)
+    this.usersService.deleteUser(this.id)
+    this.usersService.deleteAccount(this.id)
    }
 }
