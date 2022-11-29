@@ -21,7 +21,7 @@
       </section>
       <button class="dayButton" type="submit" (click)="doEdit(day)">Edytuj</button>
       <div *ngIf="isEdit&&currentDay==day">
-        <select class="select" name="workoutChoose" (change)="workoutChoose($event)" id="work" >
+        <select class="select" name="workoutChoose" (change)="workoutChoose($event, day)" id="work" >
           <option class="option">--wybierz--</option>
           <option [ngValue]="workout" *ngFor="let workout of workouts">{{workout.Name}}</option>
         </select>
