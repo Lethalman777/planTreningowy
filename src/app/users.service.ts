@@ -6,126 +6,203 @@ import { Workout, WorkoutType } from './classes/workout';
 import { catchError, map } from 'rxjs/operators';
 import { LoginAccount, LoginAccountType } from './classes/loginAccount';
 import { Schedule, ScheduleType } from './classes/schedule';
-import { RegistrationAccount, RegistrationAccountType } from './classes/registrationAccount';
+import { RegistrationAccountType } from './classes/registrationAccount';
+import { DayWorkout, DayWorkoutType } from './classes/dayWorkout';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UsersService {
-
   private url = 'http://localhost:7777/users';
   private accountsUrl = 'http://localhost:7777/accounts';
   private workoutsUrl = 'http://localhost:7777/workouts';
   private scheduleUrl = 'http://localhost:7777/schedule';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  deleteUser(user: User){
-    this.http.delete<User>(this.url+'/'+user.Index_nr, )
-      .pipe(
-
-        catchError(this.handleError<User>('deleteUser'))
-      ).subscribe((res)=>{
-        console.log(res)
+  deleteUser(user: User) {
+    this.http
+      .delete<User>(this.url + '/' + user.Index_nr)
+      .pipe(catchError(this.handleError<User>('deleteUser')))
+      .subscribe((res) => {
+        console.log(res);
       });
   }
 
-  deleteSchedule(schedule: Schedule){
-    this.http.delete<Schedule>(this.scheduleUrl+'/'+schedule.Index_nr, )
-      .pipe(
-
-        catchError(this.handleError<Schedule>('deleteSchedule'))
-      ).subscribe((res)=>{
-        console.log(res)
+  deleteSchedule(schedule: Schedule) {
+    this.http
+      .delete<Schedule>(this.scheduleUrl + '/' + schedule.Index_nr)
+      .pipe(catchError(this.handleError<Schedule>('deleteSchedule')))
+      .subscribe((res) => {
+        console.log(res);
       });
   }
 
-
-  getUser(index_nr:number): Observable<User> {
-    console.log("get user"+index_nr);
+  getUser(index_nr: number): Observable<User> {
+    console.log('get user' + index_nr);
     // const httpOptions = {
     //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     // };
-    return this.http.get<UserType>(this.url+'/'+index_nr)
-    .pipe(map((Usser:{index_nr:number,
-      name:string,
-      age:number,
-      weight:number,
-      height:number,
-      gender:string})=>
-        new User(Usser.index_nr,Usser.name,Usser.age,Usser.weight,Usser.height,Usser.gender)
+    return this.http.get<UserType>(this.url + '/' + index_nr).pipe(
+      map(
+        (Usser: {
+          index_nr: number;
+          name: string;
+          age: number;
+          weight: number;
+          height: number;
+          gender: string;
+        }) =>
+          new User(
+            Usser.index_nr,
+            Usser.name,
+            Usser.age,
+            Usser.weight,
+            Usser.height,
+            Usser.gender
+          )
       ),
-        catchError(this.handleError<User>('getUser')))
+      catchError(this.handleError<User>('getUser'))
+    );
   }
 
   getAccounts(): Observable<LoginAccount[]> {
-    console.log("get account");
-    return this.http.get<LoginAccountType[]>(this.accountsUrl)
-      .pipe(
-         map((Accounts: {
-          login:string,
-          password:string,
-          index_nr:number}[])=>Accounts.map(loginAccount=>{
-          return new LoginAccount(loginAccount.login,loginAccount.password,loginAccount.index_nr);})
-        ),
-        catchError(this.handleError<LoginAccount[]>('getAccounts', []))
-      );
+    console.log('get account');
+    return this.http.get<LoginAccountType[]>(this.accountsUrl).pipe(
+      map(
+        (
+          Accounts: {
+            login: string;
+            password: string;
+            index_nr: number;
+          }[]
+        ) =>
+          Accounts.map((loginAccount) => {
+            return new LoginAccount(
+              loginAccount.login,
+              loginAccount.password,
+              loginAccount.index_nr
+            );
+          })
+      ),
+      catchError(this.handleError<LoginAccount[]>('getAccounts', []))
+    );
   }
 
   getWorkouts(): Observable<Workout[]> {
-    console.log("get workout");
-    return this.http.get<WorkoutType[]>(this.workoutsUrl)
-      .pipe(
-         map((Workouts: {
-          index_nr:number,
-          name:string,
-          description:string}[])=>Workouts.map(workout=>{
-          return new Workout(workout.index_nr,workout.name, workout.description );})
-        ),
-        catchError(this.handleError<Workout[]>('getWorkouts', []))
-      );
+    console.log('get workout');
+    return this.http.get<WorkoutType[]>(this.workoutsUrl).pipe(
+      map(
+        (
+          Workouts: {
+            index_nr: number;
+            name: string;
+            description: string;
+          }[]
+        ) =>
+          Workouts.map((workout) => {
+            return new Workout(
+              workout.index_nr,
+              workout.name,
+              workout.description
+            );
+          })
+      ),
+      catchError(this.handleError<Workout[]>('getWorkouts', []))
+    );
   }
 
   getSchedule(): Observable<Schedule[]> {
-    console.log("get workout");
-    return this.http.get<ScheduleType[]>(this.scheduleUrl)
+    console.log('get workout');
+    return this.http.get<ScheduleType[]>(this.scheduleUrl).pipe(
+      map(
+        (
+          Schedules: {
+            index_nr: number;
+            userName: string;
+            weekNumber: number;
+            listOfDayWorkouts: DayWorkoutType[];
+          }[]
+        ) =>
+          Schedules.map((schedule) => {
+            return new Schedule(
+              schedule.index_nr,
+              schedule.weekNumber,
+              schedule.userName,
+              schedule.listOfDayWorkouts
+            );
+          })
+      ),
+      catchError(this.handleError<Schedule[]>('getSchedules', []))
+    );
+  }
+
+  getScheduleFromWeekNumber(weekNumber: number): Observable<Schedule> {
+    return this.http
+      .get<ScheduleType>(this.scheduleUrl + '/' + weekNumber)
       .pipe(
-         map((Schedules: {
-          index_nr:number,
-          index_workout:number,
-          day:string}[])=>Schedules.map(schedule=>{
-          return new Schedule(schedule.index_nr,schedule.index_workout, schedule.day);})
+        map(
+          (schedule: {
+            index_nr: number;
+            weekNumber: number;
+            userName: string;
+            listOfDayWorkouts: DayWorkoutType[];
+          }) => {
+            return new Schedule(
+              schedule.index_nr,
+              schedule.weekNumber,
+              schedule.userName,
+              schedule.listOfDayWorkouts
+            );
+          }
         ),
-        catchError(this.handleError<Schedule[]>('getSchedules', []))
+        catchError(this.handleError<Schedule>('getSchedule' + '/' + weekNumber))
       );
   }
 
   getUsers(): Observable<User[]> {
-    console.log("get user");
-    return this.http.get<UserType[]>(this.url)
-      .pipe(
-         map((Users: {index_nr:number,
-          name:string,
-          age:number,
-          weight:number,
-          height:number,
-          gender:string}[])=>Users.map(user=>{
-          return new User(user.index_nr,user.name,user.age,user.weight,user.height,user.gender);})
-        ),
-        catchError(this.handleError<User[]>('getUsers', []))
-      );
+    console.log('get user');
+    return this.http.get<UserType[]>(this.url).pipe(
+      map(
+        (
+          Users: {
+            index_nr: number;
+            name: string;
+            age: number;
+            weight: number;
+            height: number;
+            gender: string;
+          }[]
+        ) =>
+          Users.map((user) => {
+            return new User(
+              user.index_nr,
+              user.name,
+              user.age,
+              user.weight,
+              user.height,
+              user.gender
+            );
+          })
+      ),
+      catchError(this.handleError<User[]>('getUsers', []))
+    );
   }
 
   editUser(user: UserType): Observable<UserType> {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
     // const studentObj={name: student.Name, surname: student.Surname, index_nr: student.Index_nr, dataUrodzenia: student.dataUrodzenia};
     // if((student as OutstandingStudentClass).stypendium!==undefined) Object.assign(studentObj, {stypendium: (student as OutstandingStudentClass).stypendium});
     // console.log("edit",studentObj);
-    console.log("dziala")
-    return this.http.put<UserType>(this.url+'/'+user.index_nr+'.json', user, httpOptions)
+    console.log('dziala');
+    return this.http
+      .put<UserType>(
+        this.url + '/' + user.index_nr + '.json',
+        user,
+        httpOptions
+      )
       .pipe(
         // tu ładnie konwersja działa, niepotrzebne
         // map((studentret: Student)=>{
@@ -135,51 +212,49 @@ export class UsersService {
       );
   }
 
-  createUser(user: User){
+  createUser(user: User) {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
 
-    this.http.post<User>(this.url, user, httpOptions)
-      .pipe(
-
-        catchError(this.handleError<User>('createUser'))
-      ).subscribe((res)=>{
-        console.log(res)
+    this.http
+      .post<User>(this.url, user, httpOptions)
+      .pipe(catchError(this.handleError<User>('createUser')))
+      .subscribe((res) => {
+        console.log(res);
       });
   }
 
-  createSchedule(schedule: Schedule){
+  createSchedule(schedule: Schedule) {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
 
-    this.http.post<Schedule>(this.scheduleUrl, schedule, httpOptions)
-      .pipe(
-
-        catchError(this.handleError<Schedule>('createSchedule'))
-      ).subscribe((res)=>{
-        console.log(res)
+    this.http
+      .post<Schedule>(this.scheduleUrl, schedule, httpOptions)
+      .pipe(catchError(this.handleError<Schedule>('createSchedule')))
+      .subscribe((res) => {
+        console.log(res);
       });
   }
 
-  createAccount(account: RegistrationAccountType){
+  createAccount(account: RegistrationAccountType) {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
 
-    this.http.post<RegistrationAccountType>(this.accountsUrl, account, httpOptions)
+    this.http
+      .post<RegistrationAccountType>(this.accountsUrl, account, httpOptions)
       .pipe(
-
         catchError(this.handleError<RegistrationAccountType>('createAccount'))
-      ).subscribe((res)=>{
-        console.log(res)
+      )
+      .subscribe((res) => {
+        console.log(res);
       });
   }
-
 
   private handleError<T>(operation = 'operation', result?: T) {
-    console.log('nie działa')
+    console.log('nie działa');
     return (error: any): Observable<T> => {
       console.error(operation + ' failed' + error);
       return of(result as T);
