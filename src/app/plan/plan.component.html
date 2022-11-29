@@ -5,6 +5,7 @@
   <ul *ngFor="let day of week">
     <section class="dayBox">
       <div>{{day.Name}}</div>
+      <div>{{day.Date}}</div>
       <section class="cwiczenieBox">
         <span *ngFor="let DayWorkouts of schedule.ListOfDayWorkouts">
            <span *ngIf="DayWorkouts.date==day.Date">

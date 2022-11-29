@@ -15,21 +15,20 @@ export class PlanComponent implements OnInit {
   schedule: Schedule = new Schedule(0, 0, '', []);
   schedules!: Schedule[];
   workouts: Workout[] = [];
-  workout!: Workout;
   week: Day[] = [];
   isEdit: boolean = false;
   currentDay!: Day;
   currentDate!: Date;
+  weekId: number = 48;
 
   constructor(usersService: UsersService, private route: ActivatedRoute) {
     this.usersService = usersService;
     this.currentDate = new Date();
-    usersService.getScheduleFromWeekNumber(48).subscribe((data) => {
+    usersService.getScheduleFromWeekNumber(this.weekId).subscribe((data) => {
       this.schedule = data;
     });
     usersService.getWorkouts().subscribe((data) => (this.workouts = data));
     this.week = this.getWeek(this.currentDate);
-    console.log(this.week);
   }
 
   ngOnInit(): void {}
@@ -119,8 +118,9 @@ export class PlanComponent implements OnInit {
     // ) {
     //   return;
     // }
+    this.weekId++;
     this.usersService
-      .getScheduleFromWeekNumber(Number(this.schedule.WeekNumber) + 1)
+      .getScheduleFromWeekNumber(this.weekId)
       .subscribe((data) => {
         this.schedule = data;
         let date: Date = new Date(this.schedule.ListOfDayWorkouts[0].date);
@@ -135,13 +135,16 @@ export class PlanComponent implements OnInit {
     //   ) == null
     // ) {
     //   return;
-    // }
+    //
+    this.weekId--;
     this.usersService
-      .getScheduleFromWeekNumber(Number(this.schedule.WeekNumber) - 1)
+      .getScheduleFromWeekNumber(this.weekId)
       .subscribe((data) => {
         this.schedule = data;
         let date: Date = new Date(this.schedule.ListOfDayWorkouts[0].date);
         this.week = this.getWeek(date);
+        console.log(this.schedule.ListOfDayWorkouts);
+        console.log(date);
         console.log(this.week);
       });
   }
