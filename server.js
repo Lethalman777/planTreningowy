@@ -191,7 +191,56 @@ app.post('/accounts', (req, res) => {
   });
 });
 
-app.put('/users/:index', (req, res) => {
+app.put('/schedule/:index_nr', (req, res) => {
+  req.params.index_nr=req.body.index_nr
+  fs.readFile('./schedule.json', 'utf8', (err, scheduleJson) => {
+      if (err) {
+          console.log("File read failed in PUT /schedule/" + req.params.index_nr+": "+ err);
+          res.status(500).send('File read failed');
+          return;
+      }
+      var schedules = JSON.parse(scheduleJson);
+      var scheduleBody = schedules.find(scheduletmp => scheduletmp.index_nr == req.body.index_nr);
+      if (scheduleBody && scheduleBody.index_nr != req.params.index_nr) {
+          console.log("schedule by index_nr = " + scheduleBody.index_nr + " already exists"+req.params.index_nr);
+          res.status(500).send('schedule by index_nr = ' + scheduleBody.index_nr + ' already exists');
+          return;
+      }
+      var schedule = schedules.find(scheduletmp => scheduletmp.index_nr == req.params.index_nr);
+      if (!schedule) {
+        schedules.push(req.body);
+          var newList = JSON.stringify(schedules);
+          fs.writeFile('./schedule.json', newList, err => {
+              if (err) {
+                  console.log("Error writing file in PUT /schedule/" + req.params.index_nr+": "+err);
+                  res.status(500).send('Error writing file schedule.json');
+              } else {
+                  res.status(201).send(req.body);
+                  console.log("Successfully wrote file schedule.json and added new schedule with index_nr = " + req.body.index_nr);
+              }
+          });
+      } else {
+          for (var i = 0; i < schedules.length; i++) {
+              if (schedules[i].index_nr == schedule.index_nr) {
+                schedules[i] = req.body;
+              }
+          }
+          var newList = JSON.stringify(schedules);
+          fs.writeFile('./schedule.json', newList, err => {
+              if (err) {
+                  console.log("Error writing file in PUT /schedule/" + req.params.index+": "+ err);
+                  res.status(500).send('Error writing file schedule.json');
+              } else {
+                  res.status(200).send(req.body);
+                  console.log("Successfully wrote file schedule.json and edit schedule with old index = " + req.params.index);
+              }
+          });
+      }
+  });
+});
+
+app.put('/users/:index_nr', (req, res) => {
+  req.params.index_nr=req.body.index_nr
     fs.readFile('./users.json', 'utf8', (err, usersJson) => {
         if (err) {
             console.log("File read failed in PUT /users/" + req.params.index_nr+": "+ err);

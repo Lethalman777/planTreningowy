@@ -1,6 +1,6 @@
 <h1 style="text-indent: 49%;"> Oto twój plan tygodnia </h1>
 <section class="kalendarz">
-  <button class="nextButton" style="margin-top:176px" type="submit">Poprzedni tydzień</button>
+  <button class="nextButton" style="margin-top:176px" type="submit" (click)="previousWeek()">Poprzedni tydzień</button>
   <ul *ngFor="let day of week">
     <section class="dayBox">
       <div>{{day.Name}}</div>
@@ -9,20 +9,29 @@
            <span *ngIf="DayWorkouts.date==day.Date">
               <div *ngFor="let workout of DayWorkouts.workouts">
                   <app-workout style="color:black;font-weight: 900;" [workout]="workout"></app-workout>
+                  <div *ngIf="isEdit&&currentDay==day">
+                    <button class="dayButton" type="submit" (click)="workoutDelete(workout)">Usuń</button>
+                  </div>
               </div>
           </span>
         </span>
       </section>
-      <button class="dayButton" type="submit">Edytuj</button>
+      <button class="dayButton" type="submit" (click)="doEdit(day)">Edytuj</button>
+      <div *ngIf="isEdit&&currentDay==day">
+        <select  name="workoutChoose" (change)="workoutChoose($event)" id="work" >
+          <option>--wybierz--</option>
+          <option [ngValue]="workout" *ngFor="let workout of workouts">{{workout.Name}}</option>
+        </select>
+      </div>
     </section>
   </ul>
   <section class="przyciski">
-    <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień</button> <br>
+    <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit" (click)="nextWeek()">Następny tydzień</button> <br>
     <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień(+)</button> <br>
     <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień(-)</button>
   </section>
   </section>
-
+<app-time></app-time>
 <!--<section class="kalendarz">
   <section class="dayBox">
     <div>Poniedziałek</div>

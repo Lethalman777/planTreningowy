@@ -7,6 +7,7 @@ import { PlanComponent } from './plan/plan.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RegistrationComponent } from './registration/registration.component'
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {path: 'log-in', component: LogInComponent},

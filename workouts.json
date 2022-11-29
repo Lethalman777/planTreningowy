@@ -8,5 +8,10 @@
     "index_nr":2,
     "name":"spacer na bieżni",
     "description":"20 min"
+  },
+  {
+    "index_nr":3,
+    "name":"podciąganie",
+    "description":"5 razy 10 powtórzeń"
   }
 ]

@@ -24,13 +24,13 @@ export class UserEditComponent implements OnInit {
     index_nr:this.user.Index_nr,
     name:this.user.Name,
     age:this.user.Age,
-    height:this.user.Height,
     weight:this.user.Weight,
-    gender:this.user.Gender,
+    height:this.user.Height,
+    gender:this.user.Gender
     }
     this.usersService.editUser(userCopy).subscribe(ret=>  {
       console.log("ret",ret);
-      this.user=this.user}
+      }
       //pobieramy dane getem
       );
       this.messageEvent.emit(-1);
