@@ -10,12 +10,12 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  {path: 'log-in', component: LogInComponent},
+    {path: 'log-in', component: LogInComponent},
     {path: 'registration', component: RegistrationComponent},
-    {path: 'plan', component: PlanComponent},
+    {path: 'plan/:id', component: PlanComponent},
     {path: '', redirectTo:'/home', pathMatch: 'full'},
     {path: 'home', component: HomePageComponent},
-    {path:'users/:id', component: UserDetailComponent}
+    {path: 'users/:id', component: UserDetailComponent}
   ];
 
 @NgModule({
