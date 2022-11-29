@@ -14,6 +14,8 @@ import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { TimeComponent } from './time/time.component';
+import { TimePipe } from './time.pipe';
 
 export const appRouters: Routes = [
   {path: 'login', component: LogInComponent},
@@ -30,7 +32,9 @@ export const appRouters: Routes = [
     RegistrationComponent,
     PlanComponent,
     WorkoutComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    TimeComponent,
+    TimePipe
   ],
   imports: [
     BrowserModule,
