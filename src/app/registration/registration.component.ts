@@ -45,12 +45,12 @@ export class RegistrationComponent implements OnInit {
       gender: new FormControl('', Validators.required),
       passwordGroup: new FormGroup({
         psd: new FormControl('', [
-         // Validators.required,
-          //Validators.minLength(6),
+          Validators.required,
+          Validators.minLength(6),
         ]),
         pconfirm: new FormControl('', [
-          //Validators.required,
-         // Validators.minLength(6),
+         Validators.required,
+         Validators.minLength(6),
         ]),
       }),
     });

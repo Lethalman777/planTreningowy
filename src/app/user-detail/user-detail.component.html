@@ -5,9 +5,9 @@
       <h2><b>Imię:</b>{{ user.Name }}  <b>Wiek:</b>{{user.Age}}  <b>Waga:</b>{{user.Weight}}  <b>Wzrost:</b>{{user.Height}}  <b>Płeć:</b>{{user.Gender}}</h2>
     </div>
   </section>
-  <section style="display:flex;">
-    <button class="editButton" routerLink="/user-edit/{{user?.Index_nr}}">Edytuj dane</button>
-    <button class="deleteButton" (click)="deleteUser()">Usuń konto</button>
-    <button class="planButton" routerLink="/plan/{{user?.Index_nr}}" >Zajrzyj do plany</button>
+  <section style="margin-top: 50px; display:flex;">
+    <button  class="editButton" routerLink="/user-edit/{{user?.Index_nr}}">Edytuj dane</button>
+    <button  class="deleteButton" (click)="deleteUser()">Usuń konto</button>
+    <button  class="planButton" routerLink="/plan/{{user?.Index_nr}}" >Zajrzyj do plany</button>
   </section>
 </section>
