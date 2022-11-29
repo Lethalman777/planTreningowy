@@ -386,5 +386,117 @@ h1{
 .nextButton:hover{
   background-color: #2ecc71;
 }
-
-
+.detailsBox{
+  width: 600px;
+  padding: 40px;
+  margin-top: 0;
+  margin-left: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 20px;
+  border-radius: 15px;
+  background: #191919;
+  text-align: center;
+}
+.details h1{
+  color:white;
+  font-size: xx-large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.details h2{
+  color: white;
+  word-spacing: 5px;
+}
+.details h2 b{
+  word-spacing: 2px;
+  color:#ffa31a;
+  font-size:x-large
+}
+.editButton {
+  border: 0;
+  background: none;
+  height: 50px;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+  cursor: pointer;
+}
+.editButton:hover{
+  width: 220px;
+  background-color:#2ecc71;
+}
+.planButton{
+  border: 0;
+  background: none;
+  height: 50px;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+  cursor: pointer;
+}
+.planButton:hover{
+  width: 220px;
+  background-color:#2ecc71;
+}
+.timeBox{
+  border: 0;
+  background:#191919;
+  height: 50px;
+  display: block;
+  margin: 5px auto;
+  border: 2px solid #ffa31a;
+  padding: 14px 40px;
+  outline: none;
+  color: #ffa31a;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 200px;
+}
+.time{
+  font-size:xx-large;
+  text-align: center;
+}
+.usunCwButton {
+  border: 0;
+  background:#191919;
+  height: 50px;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid red;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  width: 70px;
+  cursor: pointer;
+  text-indent: -15px;
+}
+.usunCwButton:hover {
+  background: red;
+}
+.select{
+  border-color:#ffa31a;
+  background-color:bisque;
+  cursor:pointer;
+}
+.select:hover{
+  background-color:#ffa31a;
+}

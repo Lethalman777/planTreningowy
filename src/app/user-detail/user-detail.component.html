@@ -1,3 +1,12 @@
-<div *ngIf="user">
-  {{ user.Name }} {{user.Age}}  {{user.Weight}}  {{user.Height}}  {{user.Gender}}
-</div>
+<section class="detailsBox">
+  <section class="details">
+    <div *ngIf="user">
+      <h1>Informację o Tobie</h1>
+      <h2><b>Imię:</b>{{ user.Name }}  <b>Wiek:</b>{{user.Age}}  <b>Waga:</b>{{user.Weight}}  <b>Wzrost:</b>{{user.Height}}  <b>Płeć:</b>{{user.Gender}}</h2>
+    </div>
+  </section>
+  <section style="display:flex;">
+    <button class="editButton" routerLink="/user-edit">Edytuj dane</button>
+    <button class="planButton" routerLink="/plan" >Zajrzyj do plany</button>
+  </section>
+</section>
