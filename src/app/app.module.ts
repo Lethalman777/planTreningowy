@@ -11,7 +11,7 @@ import { PlanComponent } from './plan/plan.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { WorkoutComponent } from './workout/workout.component';
-import { RoutingModule } from './routing.module';
+import { RoutingModule } from './app-routing.module';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TimeComponent } from './time/time.component';
 import { TimePipe } from './time.pipe';

@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Schedule } from '../classes/schedule';
 import { UsersService } from '../users.service';
 import { Workout, WorkoutType } from '../classes/workout';
 import { Day } from '../classes/day';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-plan',
   templateUrl: './plan.component.html',
   styleUrls: ['./plan.component.css'],
 })
-export class PlanComponent {
+export class PlanComponent implements OnInit {
   usersService!: UsersService;
   schedule: Schedule = new Schedule(0, 0, '', []);
+  schedules!: Schedule[];
   workouts: Workout[] = [];
   workout!: Workout;
   week: Day[] = [];
@@ -19,7 +21,7 @@ export class PlanComponent {
   currentDay!: Day;
   currentDate!: Date;
 
-  constructor(usersService: UsersService) {
+  constructor(usersService: UsersService, private route: ActivatedRoute) {
     this.usersService = usersService;
     this.currentDate = new Date();
     usersService.getScheduleFromWeekNumber(48).subscribe((data) => {
@@ -110,23 +112,35 @@ export class PlanComponent {
   }
 
   public nextWeek() {
+    // if (
+    //   this.schedules.find(
+    //     (u) => Number(u.WeekNumber) == Number(this.schedule.WeekNumber) + 1
+    //   ) == null
+    // ) {
+    //   return;
+    // }
     this.usersService
       .getScheduleFromWeekNumber(Number(this.schedule.WeekNumber) + 1)
       .subscribe((data) => {
         this.schedule = data;
-        let date: Date = new Date(this.schedule.ListOfDayWorkouts[0].date
-          );
+        let date: Date = new Date(this.schedule.ListOfDayWorkouts[0].date);
         this.week = this.getWeek(date);
       });
   }
 
   public previousWeek() {
+    // if (
+    //   this.schedules.find(
+    //     (u) => Number(u.WeekNumber) == Number(this.schedule.WeekNumber) - 1
+    //   ) == null
+    // ) {
+    //   return;
+    // }
     this.usersService
       .getScheduleFromWeekNumber(Number(this.schedule.WeekNumber) - 1)
       .subscribe((data) => {
         this.schedule = data;
-        let date: Date = new Date(this.schedule.ListOfDayWorkouts[0].date
-        );
+        let date: Date = new Date(this.schedule.ListOfDayWorkouts[0].date);
         this.week = this.getWeek(date);
         console.log(this.week);
       });
