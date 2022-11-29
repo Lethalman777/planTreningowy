@@ -1,6 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { User, UserType } from '../classes/user';
 import { UsersService } from '../users.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'edit-user',
   templateUrl: './user-edit.component.html',
@@ -8,13 +9,14 @@ import { UsersService } from '../users.service';
 })
 export class UserEditComponent implements OnInit {
 
+  index_nr!:number
   @Input() user!: User;
   @Input() selected!:number
   usersService:UsersService
   @Output() messageEvent = new EventEmitter<number>();
   @Output("editMethod") doEditInParent=new EventEmitter<{student:User,which:number}>();
 
-  constructor(usersService: UsersService) {
+  constructor(usersService: UsersService, private router:Router, private route:ActivatedRoute) {
     this.usersService = usersService
    }
 
@@ -34,9 +36,15 @@ export class UserEditComponent implements OnInit {
       //pobieramy dane getem
       );
       this.messageEvent.emit(-1);
+      this.router.navigate(['/users',this.user.Index_nr])
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      //this.id = Number(params['id']);
+      this.index_nr = Number(this.route.snapshot.paramMap.get('id'))
+      this.usersService.getUser(this.index_nr).subscribe(data=>this.user=data)
+  })
   }
 
   // doEdit(data:{user:User,which:number}){
