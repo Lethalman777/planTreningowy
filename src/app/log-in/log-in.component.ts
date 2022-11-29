@@ -51,6 +51,7 @@ export class LogInComponent implements OnInit {
         this.users.forEach(element1 => {
           if(element.Index_nr == element1.Index_nr){
             this.user = element1
+            console.log(this.user.Index_nr)
           }
         });
       }
