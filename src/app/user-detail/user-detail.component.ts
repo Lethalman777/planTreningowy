@@ -12,23 +12,31 @@ import { User } from '../classes/user';
 export class UserDetailComponent {
 user:User |undefined;
 users:User[]=[];
+  constructor(private route: ActivatedRoute, private usersService: UsersService, private location: Location){
 
-  constructor(private route: ActivatedRoute, private usersService: UsersService, private location: Location){}
+  }
 id:any;
   ngOnInit(): void{
     this.route.queryParams.subscribe(params => {
-      this.id = params['id'];
+      //this.id = Number(params['id']);
+      this.id = this.route.snapshot.paramMap.get('id')
   })
   this.getUser();
+
 }
 
   getUser(): void{
-    this.usersService.getUsers().subscribe(users => this.users = users);
-    this.users.forEach(element => {
-     if(element.Index_nr == this.id){
-        this.user = element
-     }
-  })
+
+    this.usersService.getUser(this.id).subscribe(data=>this.user=data)
+  //   this.usersService.getUsers().subscribe(users => this.users = users);
+  //   console.log(this.users.length)
+  //   this.users.forEach(element => {
+  //     console.log(element.Index_nr)
+  //    if(element.Index_nr == this.id){
+
+  //       this.user = element
+  //    }
+  // })
   console.log(this.user)
 }
 

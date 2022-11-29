@@ -14,7 +14,7 @@ export class LogInComponent implements OnInit {
   @Input() loginAccount!: LoginAccount;
   loginAccounts:LoginAccount[] = []
   workouts:Workout[]=[]
-  user:User = new User(1,"",0,0,0,"")
+  user:User = new User(2,"",0,0,0,"")
   users:User[]=[]
   i:number = 0
   isLoged:boolean = false
@@ -47,19 +47,19 @@ export class LogInComponent implements OnInit {
       console.log("dobre haslo");
     }
     this.loginAccounts.forEach(element => {
-      if(element.Login == this.loginAccount.Login && element.Password == this.loginAccount.Password){
-        this.isLoged=true
-        this.users.forEach(element1 => {
-          if(element.Index_nr == element1.Index_nr){
-            this.user = element1
-          }
-          // return this.usersService.getUser(this.user.Index_nr).subscribe(user => this.user = user);
-        });
-      }
+      if(element.Login === this.loginAccount.Login && element.Password === this.loginAccount.Password){
+        console.log(this.loginAccount.Login)
+    console.log(this.loginAccount.Password)
+        this.usersService.getUser(element.Index_nr).subscribe(data=>this.user=data)
+        console.log(this.user.Index_nr)
 
-    });
+          // return this.usersService.getUser(this.user.Index_nr).subscribe(user => this.user = user);
+        }});
+
   }
 
-
-
 }
+
+
+
+

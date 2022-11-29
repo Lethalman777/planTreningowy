@@ -16,6 +16,7 @@ export class UsersComponent implements OnInit {
 
   constructor(usersService: UsersService) {
     usersService.getUsers().subscribe(data=>this.users = data)
+    console.log(this.users.length)
     usersService.getAccounts().subscribe(data=>this.accounts=data)
      this.users.push(new User(0,"Eryk", 22, 70, 178, "male"));
      this.users.push(new User(0,"Dawid", 21, 105, 200, "male"));

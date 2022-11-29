@@ -45,9 +45,6 @@ export class UsersService {
 
    getUser(index_nr:number): Observable<User> {
      console.log("get user"+index_nr);
-   const httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-   };
      return this.http.get<UserType>(this.url+'/'+index_nr)
      .pipe(map((Usser:{index_nr:number,
        name:string,
