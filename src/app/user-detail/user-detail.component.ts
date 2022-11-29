@@ -13,7 +13,6 @@ export class UserDetailComponent {
 user:User |undefined;
 users:User[]=[];
   constructor(private route: ActivatedRoute, private usersService: UsersService, private location: Location){
-
   }
 id:any;
   ngOnInit(): void{
@@ -26,9 +25,8 @@ id:any;
 }
 
   getUser(): void{
-
-    this.usersService.getUser(this.id).subscribe(data=>this.user=data)
-  //   this.usersService.getUsers().subscribe(users => this.users = users);
+    console.log(this.id)
+    this.usersService.getUser(this.id).subscribe(users => this.user = users);
   //   console.log(this.users.length)
   //   this.users.forEach(element => {
   //     console.log(element.Index_nr)

@@ -44,7 +44,7 @@ export class UsersService {
 
 
    getUser(index_nr:number): Observable<User> {
-     console.log("get user"+index_nr);
+     console.log("get user "+index_nr);
      return this.http.get<UserType>(this.url+'/'+index_nr)
      .pipe(map((Usser:{index_nr:number,
        name:string,
@@ -61,19 +61,7 @@ export class UsersService {
   //   return of(user);
   // }
 
-  getAccounts(): Observable<LoginAccount[]> {
-    console.log("get account");
-    return this.http.get<LoginAccountType[]>(this.accountsUrl)
-      .pipe(
-         map((Accounts: {
-          login:string,
-          password:string,
-          index_nr:number}[])=>Accounts.map(loginAccount=>{
-          return new LoginAccount(loginAccount.login,loginAccount.password,loginAccount.index_nr);})
-        ),
-        catchError(this.handleError<LoginAccount[]>('getAccounts', []))
-      );
-  }
+
 
   getWorkouts(): Observable<Workout[]> {
     console.log("get workout");
@@ -116,6 +104,19 @@ export class UsersService {
           return new User(user.index_nr,user.name,user.age,user.weight,user.height,user.gender);})
         ),
         catchError(this.handleError<User[]>('getUsers', []))
+      );
+  }
+  getAccounts(): Observable<LoginAccount[]> {
+    console.log("get account");
+    return this.http.get<LoginAccountType[]>(this.accountsUrl)
+      .pipe(
+         map((Accounts: {
+          login:string,
+          password:string,
+          index_nr:number}[])=>Accounts.map(loginAccount=>{
+          return new LoginAccount(loginAccount.login,loginAccount.password,loginAccount.index_nr);})
+        ),
+        catchError(this.handleError<LoginAccount[]>('getAccounts', []))
       );
   }
 

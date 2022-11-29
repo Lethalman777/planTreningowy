@@ -13,11 +13,14 @@
         id="password"
       />
     </tr>
+    <tr *ngIf="isWrongData">
+      <div>Niewłaściwy login lub hasło</div>
+    </tr>
     <tr>
       <button
         class="logginButton"
         (click)="LogIn()"
-        routerLink="/users/{{user.Index_nr}}"
+
         type="submit"
       >
         Zaloguj się
