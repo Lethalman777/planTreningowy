@@ -1,1 +1,26 @@
-[{"index_nr":3,"name":"Eryk","age":22,"weight":79,"height":180,"gender":"male"},{"index_nr":1,"name":"Dawid","age":21,"weight":105,"height":198,"gender":"male"}]
+[
+  {
+    "index_nr": 1,
+    "name": "Dawid",
+    "age": 0,
+    "weight": 0,
+    "height": 0,
+    "gender": "male"
+  },
+  {
+    "index_nr": 2,
+    "name": "Dominika",
+    "age": 21,
+    "weight": 55,
+    "height": 170,
+    "gender": "female"
+  },
+  {
+    "index_nr": 3,
+    "name": "Eryk",
+    "age": 22,
+    "weight": 70,
+    "height": 178,
+    "gender": "male"
+  }
+]

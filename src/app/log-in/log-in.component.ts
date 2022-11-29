@@ -3,7 +3,7 @@ import { LoginAccount } from '../classes/loginAccount';
 import { User } from '../classes/user';
 import { Workout } from '../classes/workout';
 import { UsersService } from '../users.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',

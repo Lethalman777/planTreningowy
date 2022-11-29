@@ -1,88 +1,142 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as e from 'express';
-import { RegistrationAccount, RegistrationAccountType } from '../classes/registrationAccount';
-import { User } from '../classes/user';
+import {
+  RegistrationAccount,
+  RegistrationAccountType,
+} from '../classes/registrationAccount';
+import { User, UserType } from '../classes/user';
 import { UsersService } from '../users.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { LoginAccount } from '../classes/loginAccount';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { nameValidator } from '../validators/name-validator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
+  users!: User[];
+  loginAccounts!: LoginAccount[];
+  usersService: UsersService;
+  formModel: FormGroup;
+  isWrongDate: boolean = false;
+  isDifferentPasswords: boolean = false;
+  isUsedLogin: boolean = false;
 
-  @Input() registrationAccount!: RegistrationAccount;
-  users!:User[]
-  loginAccounts!:LoginAccount[]
-  usersService: UsersService
-  indexes:number[] = []
-  index:number = 0
-  isDataGood:boolean = true
-  wrongs:string[]=[]
+  constructor(usersService: UsersService, private router: Router) {
+    this.usersService = usersService;
+    usersService.getUsers().subscribe((data) => (this.users = data));
+    usersService.getAccounts().subscribe((data) => (this.loginAccounts = data));
 
-  constructor(usersService:UsersService, private router:Router) {
-    this.usersService = usersService
-    usersService.getUsers().subscribe(data=>this.users=data)
-    usersService.getAccounts().subscribe(data=>this.loginAccounts=data)
-   }
-
-  ngOnInit(): void {
-    this.registrationAccount = new RegistrationAccount("", "", "", new User(0,"", 0, 0, 0, ""), 0)
+    this.formModel = new FormGroup({
+      login: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        nameValidator,
+      ]),
+      age: new FormControl('', [Validators.required, Validators.min(1)]),
+      weight: new FormControl('', [Validators.required, Validators.min(1)]),
+      height: new FormControl('', [Validators.required, Validators.min(1)]),
+      gender: new FormControl('', Validators.required),
+      passwordGroup: new FormGroup({
+        psd: new FormControl('', [
+         // Validators.required,
+          //Validators.minLength(6),
+        ]),
+        pconfirm: new FormControl('', [
+          //Validators.required,
+         // Validators.minLength(6),
+        ]),
+      }),
+    });
   }
 
-  Registration(){
-    while(this.wrongs.length > 0){
-      this.wrongs.pop()
+  ngOnInit(): void {}
+
+  registration() {
+    this.isWrongDate = !this.formModel.valid;
+    if (
+      this.formModel.value.passwordGroup.psd !=
+      this.formModel.value.passwordGroup.pconfirm
+    ) {
+      this.isDifferentPasswords = true;
+      return;
+    } else {
+      this.isDifferentPasswords = false;
     }
-      if(this.registrationAccount.Login.length < 3){
-        console.log("za krotki login");
-        this.isDataGood=false
-        this.wrongs.push('Login musi mieć przynajmniej niż 3 znaki')
+    this.loginAccounts.forEach((element) => {
+      if (element.Login == this.formModel.value.login) {
+        this.isUsedLogin = true;
+        return;
       }
-      else{
-        console.log("dobry login");
-        this.isDataGood=true
-      }
-      if(this.registrationAccount.Password != this.registrationAccount.PasswordConfirmed){
-        console.log("hasla są rózne");
-        this.isDataGood=false
-        this.wrongs.push('Wpisz powtórzenie hasła poprawnie')
-      }
-      else{
-        console.log("dobre haslo");
-        this.isDataGood=true
-      }
-      this.loginAccounts.forEach(element => {
-        if(element.Login==this.registrationAccount.Login){
-          console.log("istnieje już taki login");
-        this.isDataGood=false
-        this.wrongs.push('Wpisz inny login')
-        }
+    });
+
+    if (this.formModel.valid) {
+      let index = 1;
+      let indexes: number[] = [];
+      this.users.forEach((element) => {
+        indexes.push(element.Index_nr);
       });
-      if(this.isDataGood){
-      this.index = 1
-      this.users.forEach(element => {
-        this.indexes.push(element.Index_nr)
-      });
-      while(this.indexes.includes(this.index)){
-        this.index++
+      while (indexes.includes(index)) {
+        index++;
       }
-      this.registrationAccount.User.Index_nr = this.index
-      this.registrationAccount.Index_nr = this.index
-      this.usersService.createUser(this.registrationAccount.User)
-      // this.registrationAccountType.login = this.registrationAccount.Login
-      // this.registrationAccountType.password = this.registrationAccount.Password
-      // this.registrationAccountType.index_nr = this.index
-      const registrationAccountType : RegistrationAccountType = {
-        login : this.registrationAccount.Login,
-        password : this.registrationAccount.Password,
-        index_nr : this.index
-      }
-      this.usersService.createAccount(registrationAccountType)
-      this.router.navigate(['/plan'])
+
+      const registrationAccountType: RegistrationAccountType = {
+        login: this.formModel.value.login,
+        password: this.formModel.value.passwordGroup.psd,
+        index_nr: index,
+      };
+      this.usersService.createAccount(registrationAccountType);
+      console.log(registrationAccountType);
+      const user: User = new User(
+        index,
+        this.formModel.value.name,
+        this.formModel.value.age,
+        this.formModel.value.weight,
+        this.formModel.value.height,
+        this.formModel.value.gender
+      );
+      console.log(user);
+
+      this.usersService.createUser(user);
+      this.router.navigate(['/log-in']);
     }
   }
 
+  get login() {
+    return this.formModel.get('login');
+  }
+
+  get name() {
+    return this.formModel.get('name');
+  }
+
+  get age() {
+    return this.formModel.get('age');
+  }
+
+  get weight() {
+    return this.formModel.get('weight');
+  }
+
+  get height() {
+    return this.formModel.get('height');
+  }
+
+  get gender() {
+    return this.formModel.get('gender');
+  }
+
+  get password() {
+    return this.formModel.get('passwordGroup')?.get('psd');
+  }
+
+  get passwordConfirm() {
+    return this.formModel.get('passwordGroup')?.get('pconfirm');
+  }
 }

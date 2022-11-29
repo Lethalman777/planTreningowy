@@ -1,41 +1,105 @@
 <section class="registerBox">
-<div>
-  <h1>Rejestracja</h1>
+  <div>
+    <h1>Rejestracja</h1>
+    <form [formGroup]="formModel" (ngSubmit)='registration()'>
       <tr>
         <div>Login:</div>
-        <input type="text" [(ngModel)]="registrationAccount.Login" id="login"/>
+        <input type="text" formControlName="login" />
       </tr>
-      <tr>
-        <div>Password:</div>
-        <input type="password" [(ngModel)]="registrationAccount.Password" id="password"/>
-      </tr>
-      <tr>
-        <div>Password Confirmed:</div>
-        <input type="password" [(ngModel)]="registrationAccount.PasswordConfirmed" id="passwordConfirmed"/>
-      </tr>
+      <div formGroupName="passwordGroup">
+        <tr>
+          <div>Password:</div>
+          <input type="password" formControlName="psd" />
+        </tr>
+        <tr>
+          <div>Password Confirmed:</div>
+          <input type="password" formControlName="pconfirm" />
+        </tr>
+      </div>
       <tr>
         <div>Imie:</div>
-        <input type="text" [(ngModel)]="registrationAccount.User.Name">
+        <input type="text" formControlName="name">
       </tr>
       <tr>
         <div>Wiek:</div>
-        <input type="number" [(ngModel)]="registrationAccount.User.Age">
+        <input type="number" formControlName="age">
       </tr>
       <tr>
         <div>Waga:</div>
-        <input type="number" [(ngModel)]="registrationAccount.User.Weight">
+        <input type="number" formControlName="weight">
       </tr>
       <tr>
         <div>Wzrost:</div>
-        <input type="number" [(ngModel)]="registrationAccount.User.Height">
+        <input type="number" formControlName="height">
       </tr>
       <tr>
         <div>Płeć:</div>
-        <input type="text" [(ngModel)]="registrationAccount.User.Gender">
+        <select name="gender" id="gender" formControlName="gender">
+          <option value="male">Facet</option>
+          <option value="female">Baba</option>
+        </select>
       </tr>
       <tr>
-          <button class="registerButton" style="margin-top: 25px;" (click)="Registration()" type="submit">Zarejestruj się</button>
-          <button class="backButton" routerLink="/log-in">Powrót</button>
+        <!-- *ngIf="formModel.valid" -->
+        <button class="registerButton" style="margin-top: 25px;" type="submit">Zarejestruj się</button>
+        <button class="backButton" routerLink="/log-in">Powrót</button>
       </tr>
+    </form>
   </div>
 </section>
+<section *ngIf="isWrongDate">
+  <div *ngIf="login?.errors?.['required']" style="color: red">
+    Login is required.
+  </div>
+  <div *ngIf="login?.errors?.['minlength']" style="color: red">
+    Login min length is {{login?.errors?.['minlength']['requiredLength']}}.
+  </div>
+  <div *ngIf="password?.errors?.['required']" style="color: red">
+    Password is required.
+  </div>
+  <div *ngIf="password?.errors?.['minlength']" style="color: red">
+    Password min length is {{password?.errors?.['minlength']['requiredLength']}}.
+  </div>
+  <div *ngIf="passwordConfirm?.errors?.['required']" style="color: red">
+    Password Confirmed is required.
+  </div>
+  <div *ngIf="passwordConfirm?.errors?.['minlength']" style="color: red">
+    Password Confirmed min length is {{passwordConfirm?.errors?.['minlength']['requiredLength']}}.
+  </div>
+  <div *ngIf="name?.errors?.['required']" style="color: red">
+    Name is required.
+  </div>
+  <div *ngIf="name?.errors?.['minlength']" style="color: red">
+    Name min length is {{name?.errors?.['minlength']['requiredLength']}}.
+  </div>
+  <div *ngIf="name?.errors?.['onlyLetters']" style="color: red">
+    Name can contain only letters
+  </div>
+  <div *ngIf="age?.errors?.['required']" style="color: red">
+    Age is required.
+  </div>
+  <div *ngIf="age?.errors?.['min']" style="color: red">
+    Age min is {{age?.errors?.['min']['min']}}.
+  </div>
+  <div *ngIf="weight?.errors?.['required']" style="color: red">
+    Weight is required.
+  </div>
+  <div *ngIf="weight?.errors?.['min']" style="color: red">
+    Weight min is {{weight?.errors?.['min']['min']}}.
+  </div>
+  <div *ngIf="height?.errors?.['required']" style="color: red">
+    Height is required.
+  </div>
+  <div *ngIf="height?.errors?.['min']" style="color: red">
+    Height min is {{height?.errors?.['min']['min']}}.
+  </div>
+  <div *ngIf="gender?.errors?.['required']" style="color: red">
+    Gender is required.
+  </div>
+</section>
+<div *ngIf="isDifferentPasswords" style="color: red">
+  Passwords are different.
+</div>
+<div *ngIf="isUsedLogin" style="color: red">
+  Login is already in use
+</div>

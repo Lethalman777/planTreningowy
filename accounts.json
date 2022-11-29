@@ -1,1 +1,17 @@
-[{"login":"wiesiek","password":"traktor","index_nr":1},{"login":"kosiarka","password":"somsiad","index_nr":2},{"login":"f","password":"f","index_nr":3}]
+[
+  {
+    "login": "wiesiek",
+    "password": "traktor",
+    "index_nr": 1
+  },
+  {
+    "login": "kosiarka",
+    "password": "somsiad",
+    "index_nr": 2
+  },
+  {
+    "login": "eryczeslaw",
+    "password": "spooko",
+    "index_nr": 3
+  }
+]
