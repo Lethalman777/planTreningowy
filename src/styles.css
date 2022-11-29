@@ -8,8 +8,6 @@ h1{
 .loginBox{
     width: 230px;
     padding: 40px;
-    margin-top: 100px;
-    margin-left: 110px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -134,6 +132,7 @@ h1{
 }
 .registerBox div{
   color:white;
+  font-size: large;
 }
 .registerBox input[type ="text"],
 .registerBox input[type ="password"],
@@ -208,7 +207,6 @@ h1{
   width: 230px;
   padding: 40px;
   position: absolute;
-  margin-top: 300px;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
@@ -293,8 +291,8 @@ h1{
   width:220px;
 }
 .dayBox{
-  width: 160px;
-  height: 300px;
+  width: 140px;
+  height: auto;
   padding: 40px;
   margin-top: 20px;
   margin-right:0px;
@@ -308,8 +306,8 @@ h1{
 }
 .kalendarz{
   display: flex;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 2px;
+  margin-left: 2px;
 }
 .kalendarz .dayBox ul li{
   list-style: none;
@@ -325,27 +323,27 @@ h1{
   margin: 5px auto;
   text-align: center;
   border: 2px solid #2ecc71;
-  padding: 14px 40px;
+  padding: 14px 35px;
   outline: none;
   color: white;
   border-radius: 24px;
   transition: 0.25s;
-  width: 170px;
+  width: 120px;
   cursor: pointer;
 }
 .dayButton:hover {
   background: #2ecc71;
-  width:160px;
+  width:130px;
 }
 .cwiczenieBox{
-  width:80px;
+  width:60px;
   border: 2px solid red;
   height:auto;
   background-color: bisque;
   display:block;
   margin: 5px auto;
   text-align: center;
-  padding: 14px 40px;
+  padding: 14px 35px;
   outline: none;
   border-radius: 20px;
 }
@@ -387,12 +385,10 @@ h1{
   background-color: #2ecc71;
 }
 .detailsBox{
-  width: 600px;
+  width: 700px;
   padding: 40px;
-  margin-top: 0;
-  margin-left: 100px;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%,-50%);
   border: 20px;
@@ -407,7 +403,7 @@ h1{
 }
 .details h2{
   color: white;
-  word-spacing: 5px;
+  word-spacing: 10px;
 }
 .details h2 b{
   word-spacing: 2px;
@@ -465,7 +461,6 @@ h1{
   outline: none;
   color: #ffa31a;
   border-radius: 24px;
-  transition: 0.25s;
   width: 200px;
 }
 .time{
@@ -494,9 +489,16 @@ h1{
 }
 .select{
   border-color:#ffa31a;
+  border: 2px solid #ffa31a;
+  border-radius: 20px;
   background-color:bisque;
   cursor:pointer;
 }
 .select:hover{
   background-color:#ffa31a;
+}
+.registerBox .errors{
+  color:red;
+  text-align: center;
+  font-size: small;
 }

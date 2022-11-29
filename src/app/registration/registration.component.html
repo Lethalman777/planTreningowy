@@ -5,39 +5,109 @@
       <tr>
         <div>Login:</div>
         <input type="text" formControlName="login" />
+        <section *ngIf="isWrongDate">
+          <div class="errors" *ngIf="login?.errors?.['required']">
+            Login is required.
+          </div>
+          <div class="errors" *ngIf="login?.errors?.['minlength']">
+            Login min length is {{login?.errors?.['minlength']['requiredLength']}}.
+          </div>
+        </section>
+        <div class="errors" *ngIf="isUsedLogin">
+          Login is already in use
+        </div>
       </tr>
       <div formGroupName="passwordGroup">
         <tr>
           <div>Password:</div>
           <input type="password" formControlName="psd" />
+          <section *ngIf="isWrongDate">
+            <div class="errors" *ngIf="password?.errors?.['required']">
+              Password is required.
+            </div>
+            <div class="errors" *ngIf="password?.errors?.['minlength']">
+              Password min length is {{password?.errors?.['minlength']['requiredLength']}}.
+            </div>
+          </section>
         </tr>
         <tr>
           <div>Password Confirmed:</div>
           <input type="password" formControlName="pconfirm" />
+          <section *ngIf="isWrongDate">
+            <div class="errors" *ngIf="passwordConfirm?.errors?.['required']">
+              Password Confirmed is required.
+            </div>
+            <div class="errors" *ngIf="passwordConfirm?.errors?.['minlength']">
+              Password Confirmed min length is {{passwordConfirm?.errors?.['minlength']['requiredLength']}}.
+            </div>
+          </section>
+          <div class="errors" *ngIf="isDifferentPasswords">
+            Passwords are different.
+          </div>
         </tr>
       </div>
       <tr>
         <div>Imie:</div>
         <input type="text" formControlName="name">
+        <section *ngIf="isWrongDate">
+          <div class="errors" *ngIf="name?.errors?.['required']">
+            Name is required.
+          </div>
+          <div class="errors" *ngIf="name?.errors?.['minlength']">
+            Name min length is {{name?.errors?.['minlength']['requiredLength']}}.
+          </div>
+          <div class="errors" *ngIf="name?.errors?.['onlyLetters']">
+            Name can contain only letters
+          </div>
+        </section>
       </tr>
       <tr>
         <div>Wiek:</div>
         <input type="number" formControlName="age">
+        <section *ngIf="isWrongDate">
+          <div class="errors" *ngIf="age?.errors?.['required']">
+            Age is required.
+          </div>
+          <div class="errors" *ngIf="age?.errors?.['min']">
+            Age min is {{age?.errors?.['min']['min']}}.
+          </div>
+        </section>
       </tr>
       <tr>
         <div>Waga:</div>
         <input type="number" formControlName="weight">
+        <section *ngIf="isWrongDate">
+          <div class="errors" *ngIf="weight?.errors?.['required']">
+            Weight is required.
+          </div>
+          <div class="errors" *ngIf="weight?.errors?.['min']">
+            Weight min is {{weight?.errors?.['min']['min']}}.
+          </div>
+        </section>
       </tr>
       <tr>
         <div>Wzrost:</div>
         <input type="number" formControlName="height">
+        <section *ngIf="isWrongDate">
+          <div class="errors" *ngIf="height?.errors?.['required']">
+            Height is required.
+          </div>
+          <div class="errors" *ngIf="height?.errors?.['min']">
+            Height min is {{height?.errors?.['min']['min']}}.
+          </div>
+        </section>
       </tr>
       <tr>
         <div>Płeć:</div>
-        <select name="gender" id="gender" formControlName="gender">
+        <select class="select" style="width: 220px;" name="gender" id="gender" formControlName="gender">
           <option value="male">Facet</option>
           <option value="female">Baba</option>
         </select>
+        <section *ngIf="isWrongDate">
+          <div class="errors" *ngIf="gender?.errors?.['required']">
+            Gender is required.
+          </div>
+        </section>
       </tr>
       <tr>
         <!-- *ngIf="formModel.valid" -->
@@ -47,59 +117,5 @@
     </form>
   </div>
 </section>
-<section *ngIf="isWrongDate">
-  <div *ngIf="login?.errors?.['required']" style="color: red">
-    Login is required.
-  </div>
-  <div *ngIf="login?.errors?.['minlength']" style="color: red">
-    Login min length is {{login?.errors?.['minlength']['requiredLength']}}.
-  </div>
-  <div *ngIf="password?.errors?.['required']" style="color: red">
-    Password is required.
-  </div>
-  <div *ngIf="password?.errors?.['minlength']" style="color: red">
-    Password min length is {{password?.errors?.['minlength']['requiredLength']}}.
-  </div>
-  <div *ngIf="passwordConfirm?.errors?.['required']" style="color: red">
-    Password Confirmed is required.
-  </div>
-  <div *ngIf="passwordConfirm?.errors?.['minlength']" style="color: red">
-    Password Confirmed min length is {{passwordConfirm?.errors?.['minlength']['requiredLength']}}.
-  </div>
-  <div *ngIf="name?.errors?.['required']" style="color: red">
-    Name is required.
-  </div>
-  <div *ngIf="name?.errors?.['minlength']" style="color: red">
-    Name min length is {{name?.errors?.['minlength']['requiredLength']}}.
-  </div>
-  <div *ngIf="name?.errors?.['onlyLetters']" style="color: red">
-    Name can contain only letters
-  </div>
-  <div *ngIf="age?.errors?.['required']" style="color: red">
-    Age is required.
-  </div>
-  <div *ngIf="age?.errors?.['min']" style="color: red">
-    Age min is {{age?.errors?.['min']['min']}}.
-  </div>
-  <div *ngIf="weight?.errors?.['required']" style="color: red">
-    Weight is required.
-  </div>
-  <div *ngIf="weight?.errors?.['min']" style="color: red">
-    Weight min is {{weight?.errors?.['min']['min']}}.
-  </div>
-  <div *ngIf="height?.errors?.['required']" style="color: red">
-    Height is required.
-  </div>
-  <div *ngIf="height?.errors?.['min']" style="color: red">
-    Height min is {{height?.errors?.['min']['min']}}.
-  </div>
-  <div *ngIf="gender?.errors?.['required']" style="color: red">
-    Gender is required.
-  </div>
-</section>
-<div *ngIf="isDifferentPasswords" style="color: red">
-  Passwords are different.
-</div>
-<div *ngIf="isUsedLogin" style="color: red">
-  Login is already in use
-</div>
+
+

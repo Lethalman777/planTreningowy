@@ -1,8 +1,13 @@
-<h1 style="text-indent: 49%;"> Oto twój plan tygodnia </h1>
+<h1 style="text-align:center;"> Oto twój plan tygodnia </h1>
 <app-time></app-time>
-<button class="nextButton" style="margin-top:176px" type="submit" (click)="goToDetails()">Zobacz swoje dane</button>
+<section style="display:flex;">
+  <button class="nextButton" style="width:200px;" type="submit" (click)="previousWeek()">Poprzedni tydzień</button>
+  <button class="nextButton" style="width:200px;" type="submit" (click)="goToDetails()">Zobacz swoje dane</button>
+  <button class="nextButton" style="width:200px" type="submit" (click)="nextWeek()">Następny tydzień</button> <br>
+</section>
 <section class="kalendarz">
-  <button class="nextButton" style="margin-top:176px" type="submit" (click)="previousWeek()">Poprzedni tydzień</button>
+
+
   <ul *ngFor="let day of week">
     <section class="dayBox">
       <div>{{day.Name}}</div>
@@ -19,18 +24,15 @@
           </span>
         </span>
       </section>
-      <button class="dayButton" type="submit" (click)="doEdit(day)">Edytuj</button>
       <div *ngIf="isEdit&&currentDay==day">
         <select class="select" name="workoutChoose" (change)="workoutChoose($event, day)" id="work" >
           <option class="option">--wybierz--</option>
           <option [ngValue]="workout" *ngFor="let workout of workouts">{{workout.Name}}</option>
         </select>
       </div>
+      <button class="dayButton" type="submit" (click)="doEdit(day)">Edytuj</button>
     </section>
   </ul>
-  <section class="przyciski">
-    <button class="nextButton" style="margin-top: 176px; margin-right: 20px; margin-left: 20px;" type="submit" (click)="nextWeek()">Następny tydzień</button> <br>
-  </section>
 </section>
 <!--<section class="kalendarz">
   <section class="dayBox">
