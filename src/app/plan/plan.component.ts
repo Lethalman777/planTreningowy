@@ -4,6 +4,7 @@ import { UsersService } from '../users.service';
 import { Workout, WorkoutType } from '../classes/workout';
 import { Day } from '../classes/day';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DayWorkoutType } from '../classes/dayWorkout';
 
 @Component({
   selector: 'app-plan',
@@ -11,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./plan.component.css'],
 })
 export class PlanComponent implements OnInit {
-  index_nr!:number
+  index_nr!: number;
   usersService!: UsersService;
   schedule: Schedule = new Schedule(0, 0, '', []);
   schedules!: Schedule[];
@@ -22,7 +23,11 @@ export class PlanComponent implements OnInit {
   currentDate!: Date;
   weekId: number = 48;
 
-  constructor(usersService: UsersService,private router: Router, private route: ActivatedRoute) {
+  constructor(
+    usersService: UsersService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.usersService = usersService;
     this.currentDate = new Date();
     usersService.getScheduleFromWeekNumber(this.weekId).subscribe((data) => {
@@ -33,9 +38,9 @@ export class PlanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      //this.id = Number(params['id']);
-      this.index_nr = Number(this.route.snapshot.paramMap.get('id'))})
+    this.route.queryParams.subscribe((params) => {
+      this.index_nr = Number(this.route.snapshot.paramMap.get('id'));
+    });
   }
 
   private getWeek(currentDate: Date): Day[] {
@@ -75,7 +80,7 @@ export class PlanComponent implements OnInit {
     }
   }
 
-  public workoutChoose(data: any) {
+  public workoutChoose(data: any, day: Day) {
     let workoutType!: WorkoutType;
     this.workouts.forEach((element) => {
       if (element.Name == data.target.value) {
@@ -87,17 +92,21 @@ export class PlanComponent implements OnInit {
       }
     });
 
+    if(this.schedule.ListOfDayWorkouts.find(
+      (u) => u.date == this.currentDay.Date
+    )?.workouts == null)
+    {
+      let dayWorkoutType: DayWorkoutType = {
+        date: day.Date,
+        workouts: []
+      };
+      this.schedule.ListOfDayWorkouts.push(dayWorkoutType);
+    }
+    
     this.schedule.ListOfDayWorkouts.find(
       (u) => u.date == this.currentDay.Date
     )?.workouts.push(workoutType);
-    console.log('ten work', workoutType);
-    console.log(
-      'ten czas',
-      this.schedule.ListOfDayWorkouts.find(
-        (u) => u.date == this.currentDay.Date
-      )?.workouts
-    );
-    console.log('ten np', this.schedule);
+
     this.usersService.addWorkoutToSchedule(this.schedule);
     this.isEdit = false;
   }
@@ -116,45 +125,33 @@ export class PlanComponent implements OnInit {
   }
 
   public nextWeek() {
-    // if (
-    //   this.schedules.find(
-    //     (u) => Number(u.WeekNumber) == Number(this.schedule.WeekNumber) + 1
-    //   ) == null
-    // ) {
-    //   return;
-    // }
     this.weekId++;
     this.usersService
       .getScheduleFromWeekNumber(this.weekId)
       .subscribe((data) => {
         this.schedule = data;
-        let date: Date = new Date(this.schedule.ListOfDayWorkouts[0].date);
-        this.week = this.getWeek(date);
       });
+
+    let nextDate: Date = new Date(this.week[6].Date);
+    let nextDay: number = nextDate.getDate() + 1;
+    nextDate.setDate(nextDay);
+    this.week = this.getWeek(nextDate);
   }
 
   public previousWeek() {
-    // if (
-    //   this.schedules.find(
-    //     (u) => Number(u.WeekNumber) == Number(this.schedule.WeekNumber) - 1
-    //   ) == null
-    // ) {
-    //   return;
-    //
     this.weekId--;
     this.usersService
       .getScheduleFromWeekNumber(this.weekId)
       .subscribe((data) => {
         this.schedule = data;
-        let date: Date = new Date(this.schedule.ListOfDayWorkouts[0].date);
-        this.week = this.getWeek(date);
-        console.log(this.schedule.ListOfDayWorkouts);
-        console.log(date);
-        console.log(this.week);
       });
+    let previousDate: Date = new Date(this.week[0].Date);
+    let previousDay: number = previousDate.getDate() - 1;
+    previousDate.setDate(previousDay);
+    this.week = this.getWeek(previousDate);
   }
 
-  public goToDetails(){
-    this.router.navigate(['/users',this.index_nr])
+  public goToDetails() {
+    this.router.navigate(['/users', this.index_nr]);
   }
 }

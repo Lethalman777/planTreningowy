@@ -15,8 +15,13 @@
     "description":"5 razy 10 powtórzeń"
   },
   {
-    "index_nr":3,
+    "index_nr":4,
     "name":"pompeczki",
     "description":"5 razy 20 powtórzeń"
+  },
+  {
+    "index_nr":5,
+    "name":"hollow body",
+    "description":"hollow body 30 sekund"
   }
 ]
