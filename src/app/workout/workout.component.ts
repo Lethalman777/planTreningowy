@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Workout } from '../classes/workout';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Workout, WorkoutType } from '../classes/workout';
 
 @Component({
   selector: 'app-workout',
@@ -7,6 +7,10 @@ import { Workout } from '../classes/workout';
   styleUrls: ['./workout.component.css'],
 })
 export class WorkoutComponent {
-  @Input() workout!: Workout;
-  constructor() {}
+  @Input() workout!: WorkoutType;
+  @Input() index_nr!: number
+  constructor() {
+
+  }
+
 }

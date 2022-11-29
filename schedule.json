@@ -23,21 +23,21 @@
         "date": "29.11.2022",
         "workouts": [
           {
-            "index_nr":1,
-            "name":"wyciskanie na ławce",
-            "description":"5 razy 5 powtórzeń"
+          "index_nr":1,
+          "name":"wyciskanie na ławce",
+          "description":"5 razy 5 powtórzeń"
           }
         ]
       },
       {
         "date": "30.11.2022",
         "workouts": [
-          {
-            "index_nr":2,
-            "name":"spacer na bieżni",
-            "description":"20 min"
-          }
-        ]
+        {
+          "index_nr":2,
+          "name":"spacer na bieżni",
+          "description":"20 min"
+        }
+      ]
       }
     ]
   },

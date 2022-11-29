@@ -6,11 +6,11 @@
       <div>{{day.Name}}</div>
       <section class="cwiczenieBox">
         <span *ngFor="let DayWorkouts of schedule.ListOfDayWorkouts">
-           <!-- <span *ngIf="DayWorkouts.Date==day.Date"> -->
-              <div *ngFor="let workout of DayWorkouts.Workouts">
+           <span *ngIf="DayWorkouts.date==day.Date">
+              <div *ngFor="let workout of DayWorkouts.workouts">
                   <app-workout style="color:black;font-weight: 900;" [workout]="workout"></app-workout>
               </div>
-          <!-- </span> -->
+          </span>
         </span>
       </section>
       <button class="dayButton" type="submit">Edytuj</button>
@@ -22,7 +22,6 @@
     <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień(-)</button>
   </section>
   </section>
-
 
 <!--<section class="kalendarz">
   <section class="dayBox">

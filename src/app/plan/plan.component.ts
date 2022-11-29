@@ -13,6 +13,7 @@ export class PlanComponent {
   usersService!: UsersService;
   schedule: Schedule = new Schedule(0, 0, '', []);
   workouts: Workout[] = [];
+  workout!:Workout
   week: Day[] = [];
   previousMonday!: string;
   nextMonday!: string;
@@ -25,7 +26,7 @@ export class PlanComponent {
       .subscribe((data) => {(this.schedule = data)
       console.log(data)});
     usersService.getWorkouts().subscribe((data) => (this.workouts = data));
-
+    //this.workouts=this.schedule.ListOfDayWorkouts[0].Workouts
     this.week = this.getWeek(currentDate);
     this.previousMonday = this.getPreviousMonday(this.week);
     this.nextMonday = this.getNextMonday(this.week);
@@ -77,4 +78,5 @@ export class PlanComponent {
 
     return nextDate.toLocaleDateString();
   }
+
 }

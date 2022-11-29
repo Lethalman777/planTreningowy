@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 import { LoginAccount, LoginAccountType } from './classes/loginAccount';
 import { Schedule, ScheduleType } from './classes/schedule';
 import { RegistrationAccountType } from './classes/registrationAccount';
-import { DayWorkout } from './classes/dayWorkout';
+import { DayWorkout, DayWorkoutType } from './classes/dayWorkout';
 
 @Injectable({
   providedIn: 'root',
@@ -121,7 +121,7 @@ export class UsersService {
             index_nr: number;
             userName: string;
             weekNumber: number;
-            listOfDayWorkouts: DayWorkout[];
+            listOfDayWorkouts: DayWorkoutType[];
           }[]
         ) =>
           Schedules.map((schedule) => {
@@ -146,7 +146,7 @@ export class UsersService {
             index_nr: number;
             weekNumber: number;
             userName: string;
-            listOfDayWorkouts: DayWorkout[];
+            listOfDayWorkouts: DayWorkoutType[];
           }) => {
             return new Schedule(
               schedule.index_nr,

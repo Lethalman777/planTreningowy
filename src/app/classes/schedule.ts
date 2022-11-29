@@ -1,22 +1,22 @@
-import { DayWorkout } from '../classes/dayWorkout';
+import { DayWorkout, DayWorkoutType } from '../classes/dayWorkout';
 
 export type ScheduleType = {
   index_nr: number;
   weekNumber: number;
   userName: string;
-  listOfDayWorkouts: DayWorkout[];
+  listOfDayWorkouts: DayWorkoutType[];
 };
 export class Schedule {
   private index_nr: number;
   private weekNumber: number;
   private userName: string;
-  private listOfDayWorkouts: DayWorkout[];
+  private listOfDayWorkouts: DayWorkoutType[];
 
   constructor(
     index_nr: number,
     weekNumber: number,
     userName: string,
-    listOfDayWorkouts: DayWorkout[]
+    listOfDayWorkouts: DayWorkoutType[]
   ) {
     this.index_nr = index_nr;
     this.weekNumber = weekNumber;
@@ -44,11 +44,11 @@ export class Schedule {
     this.userName = userName;
   }
 
-  get ListOfDayWorkouts(): DayWorkout[] {
+  get ListOfDayWorkouts(): DayWorkoutType[] {
     return this.listOfDayWorkouts;
   }
 
-  set ListOfDayWorkouts(listOfDayWorkouts: DayWorkout[]) {
+  set ListOfDayWorkouts(listOfDayWorkouts: DayWorkoutType[]) {
     this.listOfDayWorkouts = listOfDayWorkouts;
   }
 }
