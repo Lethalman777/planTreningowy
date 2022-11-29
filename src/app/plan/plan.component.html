@@ -9,6 +9,9 @@
            <span *ngIf="DayWorkouts.date==day.Date">
               <div *ngFor="let workout of DayWorkouts.workouts">
                   <app-workout style="color:black;font-weight: 900;" [workout]="workout"></app-workout>
+                  <div *ngIf="isEdit&&currentDay==day">
+                    <button class="dayButton" type="submit" (click)="workoutDelete(workout)">Usuń</button>
+                  </div>
               </div>
           </span>
         </span>
@@ -17,7 +20,7 @@
       <div *ngIf="isEdit&&currentDay==day">
         <select  name="workoutChoose" (change)="workoutChoose($event)" id="work" >
           <option>--wybierz--</option>
-          <option [value]="workout" *ngFor="let workout of workouts">{{workout.Name}}</option>
+          <option [ngValue]="workout" *ngFor="let workout of workouts">{{workout.Name}}</option>
         </select>
       </div>
     </section>

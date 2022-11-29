@@ -192,6 +192,7 @@ app.post('/accounts', (req, res) => {
 });
 
 app.put('/schedule/:index_nr', (req, res) => {
+  req.params.index_nr=req.body.index_nr
   fs.readFile('./schedule.json', 'utf8', (err, scheduleJson) => {
       if (err) {
           console.log("File read failed in PUT /schedule/" + req.params.index_nr+": "+ err);
@@ -225,7 +226,7 @@ app.put('/schedule/:index_nr', (req, res) => {
               }
           }
           var newList = JSON.stringify(schedules);
-          fs.writeFile('./schedules.json', newList, err => {
+          fs.writeFile('./schedule.json', newList, err => {
               if (err) {
                   console.log("Error writing file in PUT /schedule/" + req.params.index+": "+ err);
                   res.status(500).send('Error writing file schedule.json');
@@ -239,6 +240,7 @@ app.put('/schedule/:index_nr', (req, res) => {
 });
 
 app.put('/users/:index_nr', (req, res) => {
+  req.params.index_nr=req.body.index_nr
     fs.readFile('./users.json', 'utf8', (err, usersJson) => {
         if (err) {
             console.log("File read failed in PUT /users/" + req.params.index_nr+": "+ err);

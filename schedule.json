@@ -5,39 +5,39 @@
     "userName": "eryczeslaw",
     "listOfDayWorkouts": [
       {
-        "date": "28.11.2022",
+        "date": "11/28/2022",
         "workouts": [
           {
-            "index_nr":1,
-            "name":"wyciskanie na ławce",
-            "description":"5 razy 5 powtórzeń"
+            "index_nr": 1,
+            "name": "wyciskanie na ławce",
+            "description": "5 razy 5 powtórzeń"
           },
           {
-            "index_nr":2,
-            "name":"spacer na bieżni",
-            "description":"20 min"
+            "index_nr": 2,
+            "name": "spacer na bieżni",
+            "description": "20 min"
           }
         ]
       },
       {
-        "date": "29.11.2022",
+        "date": "11/29/2022",
         "workouts": [
           {
-          "index_nr":1,
-          "name":"wyciskanie na ławce",
-          "description":"5 razy 5 powtórzeń"
+            "index_nr": 1,
+            "name": "wyciskanie na ławce",
+            "description": "5 razy 5 powtórzeń"
           }
         ]
       },
       {
-        "date": "30.11.2022",
+        "date": "11/30/2022",
         "workouts": [
-        {
-          "index_nr":2,
-          "name":"spacer na bieżni",
-          "description":"20 min"
-        }
-      ]
+          {
+            "index_nr": 2,
+            "name": "spacer na bieżni",
+            "description": "20 min"
+          }
+        ]
       }
     ]
   },
@@ -47,39 +47,39 @@
     "userName": "eryczeslaw",
     "listOfDayWorkouts": [
       {
-        "date": "21.11.2022",
+        "date": "11/21/2022",
         "workouts": [
           {
-            "index_nr":1,
-            "name":"wyciskanie na ławce",
-            "description":"5 razy 5 powtórzeń"
+            "index_nr": 1,
+            "name": "wyciskanie na ławce",
+            "description": "5 razy 5 powtórzeń"
           }
         ]
       },
       {
-        "date": "22.11.2022",
+        "date": "11/22/2022",
         "workouts": [
           {
-          "index_nr":1,
-          "name":"wyciskanie na ławce",
-          "description":"5 razy 5 powtórzeń"
+            "index_nr": 1,
+            "name": "wyciskanie na ławce",
+            "description": "5 razy 5 powtórzeń"
           },
           {
-            "index_nr":2,
-            "name":"spacer na bieżni",
-            "description":"20 min"
+            "index_nr": 2,
+            "name": "spacer na bieżni",
+            "description": "20 min"
           }
         ]
       },
       {
-        "date": "23.11.2022",
+        "date": "11/23/2022",
         "workouts": [
-        {
-          "index_nr":2,
-          "name":"spacer na bieżni",
-          "description":"20 min"
-        }
-      ]
+          {
+            "index_nr": 2,
+            "name": "spacer na bieżni",
+            "description": "20 min"
+          }
+        ]
       }
     ]
   },
@@ -89,17 +89,17 @@
     "userName": "eryczeslaw",
     "listOfDayWorkouts": [
       {
-        "date": "5.12.2022",
+        "date": "12/5/2022",
         "workouts": [
           {
-            "index_nr":1,
-            "name":"wyciskanie na ławce",
-            "description":"5 razy 5 powtórzeń"
+            "index_nr": 1,
+            "name": "wyciskanie na ławce",
+            "description": "5 razy 5 powtórzeń"
           },
           {
-            "index_nr":2,
-            "name":"spacer na bieżni",
-            "description":"20 min"
+            "index_nr": 2,
+            "name": "spacer na bieżni",
+            "description": "20 min"
           }
         ]
       }

@@ -19,16 +19,17 @@ export class PlanComponent {
   nextMonday!: string;
   isEdit:boolean = false
   currentDay!:Day
+  currentDate!:Date
 
   constructor(usersService: UsersService) {
     this.usersService = usersService;
-    const currentDate: Date = new Date();
+    this.currentDate = new Date();
     usersService
       .getScheduleFromWeekNumber(48)
       .subscribe((data) => {(this.schedule = data)
       console.log(data)});
     usersService.getWorkouts().subscribe((data) => (this.workouts = data));
-    this.week = this.getWeek(currentDate);
+    this.week = this.getWeek(this.currentDate);console.log(this.week)
     this.previousMonday = this.getPreviousMonday(this.week);
     this.nextMonday = this.getNextMonday(this.week);
   }
@@ -50,7 +51,7 @@ export class PlanComponent {
     for (let index = 1; index <= 7; index++) {
       week.push(
         new Day(
-          currentDate.toLocaleDateString(),
+          currentDate.toLocaleDateString('en-us'),
           currentDate.toLocaleDateString('pl-pl', { weekday: 'long' })
         )
       );
@@ -74,12 +75,31 @@ export class PlanComponent {
   }
 
   public workoutChoose(data:any){
-    const workoutType : WorkoutType = {
-      index_nr:data.target.value.Index_nr,
-      name:data.target.value.Name,
-      description:data.target.value.Description
-    }
+    let workoutType!:WorkoutType
+    this.workouts.forEach(element => {
+      if(element.Name==data.target.value){
+         workoutType = {
+          index_nr:element.Index_nr,
+          name:element.Name,
+          description:element.Description
+        }
+      }
+    });
+
     this.schedule.ListOfDayWorkouts.find(u=>u.date==this.currentDay.Date)?.workouts.push(workoutType)
+    console.log("ten work",workoutType)
+    console.log("ten czas",data.target.ngValue)
+    console.log("ten np",this.schedule)
+    this.usersService.addWorkoutToSchedule(this.schedule)
+    this.isEdit=false
+  }
+
+  public workoutDelete(workoutType:WorkoutType){
+    let position:number=Number(this.schedule.ListOfDayWorkouts.find(u=>u.date==this.currentDay.Date)?.workouts.indexOf(workoutType))
+    console.log("pozycja",position)
+    this.schedule.ListOfDayWorkouts.find(u=>u.date==this.currentDay.Date)?.workouts.splice(position,1)
+    console.log(this.schedule.ListOfDayWorkouts.find(u=>u.date==this.currentDay.Date)?.workouts)
+    //delete this.schedule.ListOfDayWorkouts.find(u=>u.date==this.currentDay.Date)?.workouts[position]
     this.usersService.addWorkoutToSchedule(this.schedule)
     this.isEdit=false
   }
@@ -88,14 +108,24 @@ export class PlanComponent {
     this.usersService
     .getScheduleFromWeekNumber(Number(this.schedule.WeekNumber)+1)
     .subscribe((data) => {(this.schedule = data)
-    console.log(data)});
+    console.log(data)
+    let date:Date = new Date(Date.parse(this.schedule.ListOfDayWorkouts[0].date))
+    this.week=this.getWeek(date)
+    this.previousMonday = this.getPreviousMonday(this.week);
+    this.nextMonday = this.getNextMonday(this.week);});
+
   }
 
   public previousWeek(){
     this.usersService
     .getScheduleFromWeekNumber(Number(this.schedule.WeekNumber)-1)
     .subscribe((data) => {(this.schedule = data)
-    console.log(data)});
+    console.log(data)
+    let date:Date = new Date(Date.parse(this.schedule.ListOfDayWorkouts[0].date))
+    this.week=this.getWeek(date) ;console.log(this.week)
+    this.previousMonday = this.getPreviousMonday(this.week);
+    this.nextMonday = this.getNextMonday(this.week);});
+
   }
 
   private getPreviousMonday(week: Day[]): string {
