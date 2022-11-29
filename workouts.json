@@ -13,5 +13,10 @@
     "index_nr":3,
     "name":"podciąganie",
     "description":"5 razy 10 powtórzeń"
+  },
+  {
+    "index_nr":3,
+    "name":"pompeczki",
+    "description":"5 razy 20 powtórzeń"
   }
 ]
