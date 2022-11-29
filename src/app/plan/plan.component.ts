@@ -74,7 +74,6 @@ export class PlanComponent {
   }
 
   public workoutChoose(data:any){
-  console.log("www")
     const workoutType : WorkoutType = {
       index_nr:data.target.value.Index_nr,
       name:data.target.value.Name,
@@ -83,6 +82,20 @@ export class PlanComponent {
     this.schedule.ListOfDayWorkouts.find(u=>u.date==this.currentDay.Date)?.workouts.push(workoutType)
     this.usersService.addWorkoutToSchedule(this.schedule)
     this.isEdit=false
+  }
+
+  public nextWeek(){
+    this.usersService
+    .getScheduleFromWeekNumber(Number(this.schedule.WeekNumber)+1)
+    .subscribe((data) => {(this.schedule = data)
+    console.log(data)});
+  }
+
+  public previousWeek(){
+    this.usersService
+    .getScheduleFromWeekNumber(Number(this.schedule.WeekNumber)-1)
+    .subscribe((data) => {(this.schedule = data)
+    console.log(data)});
   }
 
   private getPreviousMonday(week: Day[]): string {

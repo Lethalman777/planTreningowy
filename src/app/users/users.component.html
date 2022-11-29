@@ -15,6 +15,21 @@
   </table>
 </section>
 
+<!-- <section class="users">
+  <h1>Users list</h1>
+  <table>
+    <thead>
+      <div style="text-indent:28%;word-spacing:17px;" >Name Wiek Waga Wzrost Płeć</div>
+    </thead>>
+        <span *ngIf="user.Name.endsWith('a')" (click)="select(id)"[class.selected]="id===selected">
+          <print-user [user]="user" prefix = "Dane użytkowniczki: "></print-user>
+        </span>
+        <span *ngIf="!user.Name.endsWith('a')" [class.selected]="id">
+          <print-user [user]="user" prefix = "Dane użytkownika: "></print-user>
+        </span>
+  </table>
+</section> -->
+
 <div *ngIf="selected >- 1">
   <edit-user [user]="users[selected]" [selected]="selected" (messageEvent)="select($event)"></edit-user>
   <delete-user [user]="users[selected]"></delete-user>

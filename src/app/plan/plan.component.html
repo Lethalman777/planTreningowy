@@ -1,6 +1,6 @@
 <h1 style="text-indent: 49%;"> Oto twój plan tygodnia </h1>
 <section class="kalendarz">
-  <button class="nextButton" style="margin-top:176px" type="submit">Poprzedni tydzień</button>
+  <button class="nextButton" style="margin-top:176px" type="submit" (click)="previousWeek()">Poprzedni tydzień</button>
   <ul *ngFor="let day of week">
     <section class="dayBox">
       <div>{{day.Name}}</div>
@@ -23,12 +23,12 @@
     </section>
   </ul>
   <section class="przyciski">
-    <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień</button> <br>
+    <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit" (click)="nextWeek()">Następny tydzień</button> <br>
     <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień(+)</button> <br>
     <button class="nextButton" style="margin-right: 20px; margin-left: 20px;" type="submit">Następny tydzień(-)</button>
   </section>
   </section>
-
+<app-time></app-time>
 <!--<section class="kalendarz">
   <section class="dayBox">
     <div>Poniedziałek</div>
